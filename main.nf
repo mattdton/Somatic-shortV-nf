@@ -5,98 +5,162 @@ nextflow.enable.dsl=2
 
 // =================================================================
 // main.nf is the pipeline script for a nextflow pipeline
-// Should contain the following sections:
-	// Process definitions
-    // Channel definitions
-    // Workflow structure
-	// Workflow summary logs 
-
-// Examples are included for each section. Remove them and replace
-// with project-specific code. For more information see:
-// https://www.nextflow.io/docs/latest/index.html.
-//
 // ===================================================================
 
-// Import processes or subworkflows to be run in the workflow
-// Each of these is a separate .nf script saved in modules/ directory
-// See https://training.nextflow.io/basic_training/modules/#importing-modules 
-include { processOne } from './modules/process1'
-include { processTwo } from './modules/process2' 
 
-// Print a header for your pipeline 
+// Import subworkflows to be run in the workflow
+// Each of these is a separate .nf script saved in ./modules/
+
+include { checkInputs }   from './modules/check_cohort'
+include { mutect2 } from './modules/mutect2'
+include { GatherVcfs_step } from './modules/GatherVcfs_step'
+include { MergeMutectStats } from './modules/MergeMutectStats'
+include { LearnReadOrientationModel } from './modules/LearnReadOrientationModel'
+include { GetPileupSummaries_T; GetPileupSummaries_N } from './modules/GetPileupSummaries'
+include{ CalculateContamination } from './modules/CalculateContamination'
+include { FilterMutectCalls } from './modules/FilterMutectCalls'
+include { getFilteredVariants_and_annotate } from './modules/getFilteredVariants_and_annotate'
+  
+
+
+/// Print a header for your pipeline 
+
 log.info """\
 
-=======================================================================================
-Name of the pipeline - nf 
-=======================================================================================
+      ============================
+      ============================
+          SOMATIC SHORT V - NF 
+      ============================
+      ============================
 
-Created by <YOUR NAME> 
-Find documentation @ https://sydney-informatics-hub.github.io/Nextflow_DSL2_template_guide/
-Cite this pipeline @ INSERT DOI
+ -._    _.--'"`'--._    _.--'"`'--._    _.--'"`'--._    _  
+    '-:`.'|`|"':-.  '-:`.'|`|"':-.  '-:`.'|`|"':-.  '.` :    
+  '.  '.  | |  | |'.  '.  | |  | |'.  '.  | |  | |'.  '.:    
+  : '.  '.| |  | |  '.  '.| |  | |  '.  '.| |  | |  '.  '.  
+  '   '.  `.:_ | :_.' '.  `.:_ | :_.' '.  `.:_ | :_.' '.  `.  
+         `-..,..-'       `-..,..-'       `-..,..-'       `       
 
-=======================================================================================
+
+             ~~~~ Version: 1.0 ~~~~
+ 
+
+ Created by the Sydney Informatics Hub, University of Sydney
+
+ Documentation	@ https://github.com/Sydney-Informatics-Hub/SomaticShortV-nf
+
+Cite					@ 10.48546/workflowhub.workflow.431.1 ???
+
+ Log issues @ https://github.com/Sydney-Informatics-Hub/SomaticShortV-nf/issues
+
+ All the default parameters are set in `nextflow.config`
+
+ =======================================================================================
 Workflow run parameters 
 =======================================================================================
+
 input       : ${params.input}
 outDir      : ${params.outDir}
 workDir     : ${workflow.workDir}
+
 =======================================================================================
 
-"""
+ """
 
 /// Help function 
 // This is an example of how to set out the help function that 
-// will be run if run command is incorrect or missing. 
+// will be run if run command is incorrect (if set in workflow) 
+// or missing/  
 
 def helpMessage() {
     log.info"""
-  Usage:  nextflow run main.nf --input <samples.tsv> 
+  Usage:  nextflow run main.nf --ref reference.fasta
 
   Required Arguments:
-
-  --input	Specify full path and name of sample
-		input file (tab separated).
-
-  Optional Arguments:
-
-  --outDir	Specify path to output directory. 
+    --input		  Full path and name of sample input file (tsv format).
+	  --ref			  Full path and name of reference genome (fasta format).
 	
-""".stripIndent()
+  Optional Arguments:
+    --outDir    Specify name of results directory. 
+
+
+ HPC accounting arguments:
+
+        --whoami                    HPC user name (Setonix or Gadi HPC)
+        --gadi_account              Project accounting code for NCI Gadi (e.g. aa00)
+        --setonix_account           Project accounting code for Pawsey Setonix (e.g. name1234)
+
+
+  """.stripIndent()
 }
 
-// Define workflow structure. Include some input/runtime tests here.
-// See https://www.nextflow.io/docs/latest/dsl2.html?highlight=workflow#workflow
+/// Main workflow structure. 
+
 workflow {
 
-// Show help message if --help is run or (||) a required parameter (input) is not provided
+// Show help message if --help is run or if any required params are not 
+// provided at runtime
 
-if ( params.help || params.input == false ){   
-// Invoke the help function above and exit
-	helpMessage()
-	exit 1
-	// consider adding some extra contigencies here.
-	// could validate path of all input files in list?
-	// could validate indexes for reference exist?
+        if ( params.help || params.input == false )
+	{   
+        // Invoke the help function above and exit
+              helpMessage()
+              exit 1
+	} 
 
-// If none of the above are a problem, then run the workflow
-} else {
+	else 
+	{
 	
-// Define channels 
-// See https://www.nextflow.io/docs/latest/channel.html#channels
-// See https://training.nextflow.io/basic_training/channels/ 
-	input = Channel.value("${params.input}")
-
-// Run process 1 
-// See https://training.nextflow.io/basic_training/processes/#inputs 
-	processOne(input)
+  // Define input bam-pair channel
+  // Check inputs file exists
+	checkInputs(Channel.fromPath(params.input, checkIfExists: true))
 	
-// Run process 2 which takes output of process 1 
-	processTwo(processOne.out.File)
-}}
+  // Original - all files are placed in a specific folder
+  // bam_pair_ch=Channel.fromFilePairs( params.bams )
 
-// Print workflow execution summary 
+  // Split cohort file to collect info for each sample
+	bam_pair_ch = checkInputs.out
+		.splitCsv(header: true, sep:"\t")
+		.map { row -> tuple(row.sampleID, file(row.bam_N), file(row.bam_T))}
+	
+
+
+
+	# Run the processes 
+	
+  // Run mutect2 on a Tumor/Normal sample-pair
+  mutect2(params.ponvcf,params.ponvcf+'.tbi',bam_pair_ch,intervalList,base_path,refdir_path)
+
+  // Gather multiple VCF files from a scatter operation into a single VCF file
+	GatherVcfs_step(mutect2.out[0].collect(),bam_pair_ch)
+
+  // Combine the stats files across the scattered Mutect2 run
+	MergeMutectStats(bam_pair_ch,GatherVcfs_step.out[0].collect(),base_path)
+
+  // Run the gatk LearnReadOrientationModel 
+	LearnReadOrientationModel(MergeMutectStats.out[1].collect(),bam_pair_ch,base_path)
+
+  // Tabulate pileup metrics for inferring contamination - Tumor samples
+	GetPileupSummaries_T(params.common_biallelic_path,params.common_biallelic_path+'.tbi', bam_pair_ch,LearnReadOrientationModel.out.collect())
+
+  // Tabulate pileup metrics for inferring contamination - Normal samples
+  GetPileupSummaries_N(params.common_biallelic_path,params.common_biallelic_path+'.tbi',bam_pair_ch,LearnReadOrientationModel.out.collect())
+
+  // Calculate the fraction of reads coming from cross-sample contamination
+	CalculateContamination(bam_pair_ch,GetPileupSummaries_T.out.collect(),GetPileupSummaries_N.out.collect())
+
+  // Filter somatic SNVs and indels called by Mutect2
+	FilterMutectCalls(bam_pair_ch,CalculateContamination.out[0].collect(),params.outdir)	
+
+  // Select a subset of variants from a VCF file 
+	getFilteredVariants(bam_pair_ch,FilterMutectCalls.out.collect(),params.outdir,refdir_path)
+
+  // Annotate the above subsetted VCF file using snpEff
+  annotate_with_snpEff(bam_pair_ch,getFilteredVariants.out)
+
+	}}
+
 workflow.onComplete {
-summary = """
+  summary = """
 =======================================================================================
 Workflow execution summary
 =======================================================================================
@@ -109,6 +173,6 @@ outDir      : ${params.outDir}
 
 =======================================================================================
   """
-println summary
+  println summary
 
 }
