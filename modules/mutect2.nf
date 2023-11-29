@@ -53,7 +53,7 @@ process mutect2 {
              --germline-resource $refdir/gnomAD.r2.1.1.GRCh38.PASS.AC.AF.only.vcf.gz \
              --f1r2-tar-gz ${bam_id}-T_${bam_id}-N.f1r2.${splitIntervalNumber}.tar.gz \
              -XL chrM \
-             -L "$base_path/Somatic-ShortV/nextflow/make_PON_and_run_mutect2/final_scripts_runs_DSL2/100M_primary_interval_${splitIntervalNumber}.list" \
+             -L "./modules/scatter_files/100M_primary_interval_${splitIntervalNumber}.list" \  
              -O ${bam_id}-T_${bam_id}-N.unfiltered.${splitIntervalNumber}.vcf.gz
         """
 

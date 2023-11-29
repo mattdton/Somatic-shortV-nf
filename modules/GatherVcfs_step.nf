@@ -27,7 +27,7 @@ process GatherVcfs_step {
         """
         ls ${params.outdirA}/${bam_id}-T_${bam_id}-N.unfiltered.*.vcf.gz   >${bam_id}_gathered_vcfs_across_subintervals.list
 
-        # GatherVcfs requires intervals in order, so add chrM using MergeVcfs
+        # GatherVcfs requires intervals in order
         gatk GatherVcfs \
                 -I  ${bam_id}_gathered_vcfs_across_subintervals.list \
                 -O  ${bam_id}-T_${bam_id}-N.unfiltered_unsorted.vcf.gz

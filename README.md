@@ -169,8 +169,9 @@ samtools idxstats input.bam | cut -f 1
 ## Acknowledgements/citations/credits
 
 ### Authors 
+- Tracy Chew (Sydney Informatics Hub, University of Sydney)
+- Cali Willet (Sydney Informatics Hub, University of Sydney)
 - Nandan Deshpande (Sydney Informatics Hub, University of Sydney)   
-- Georgie Samaha (Sydney Informatics Hub, University of Sydney)   
 
 ### Acknowledgements 
 
