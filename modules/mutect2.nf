@@ -6,8 +6,8 @@ nextflow.enable.dsl=2
 // Define the process
 /// This process runs mutect2 on a tumor/normal sample-pair 
 
-cpus 1
-container "${params.gatk4__container}"
+//cpus 1
+//container "${params.gatk4__container}"
     
 
 process mutect2 {
@@ -24,13 +24,13 @@ process mutect2 {
         // See: https://www.nextflow.io/docs/latest/process.html#inputs
 	/// each input needs to be placed on a new line
         input:
-                path pon_vcf
-                path pon_vcf_index
+                //path pon_vcf
+                //path pon_vcf_index
                 tuple val(bam_id) , file(bam_N), file(bam_T)
-
                 each splitIntervalNumber
-		path base_path
-		path refdir
+		
+                //path base_path
+		//path refdir
 
         // See: https://www.nextflow.io/docs/latest/process.html#outputs
 	// each new output needs to be placed on a new line
@@ -43,18 +43,16 @@ process mutect2 {
         script:
 
         """
-
         gatk Mutect2 \
-             -R $refdir/Homo_sapiens_assembly38.fasta \
-             -I ${bam_T} \
+             -R $refdir/hs38DH.fasta \
              -I ${bam_N} \
+             -I ${bam_T} \
              -normal ${bam_id}-N \
-             --panel-of-normals ${pon_vcf} \
-             --germline-resource $refdir/gnomAD.r2.1.1.GRCh38.PASS.AC.AF.only.vcf.gz \
              --f1r2-tar-gz ${bam_id}-T_${bam_id}-N.f1r2.${splitIntervalNumber}.tar.gz \
              -XL chrM \
-             -L "./modules/scatter_files/100M_primary_interval_${splitIntervalNumber}.list" \  
-             -O ${bam_id}-T_${bam_id}-N.unfiltered.${splitIntervalNumber}.vcf.gz
+             -L "$base_path/final_raw_scripts_SomaticShortV_rds/final_scripts_runs_DSL2_DONOTDELETE/100M_primary_interval_${splitIntervalNumber}.list" \
+	     -O ${bam_id}-T_${bam_id}-N.unfiltered.${splitIntervalNumber}.vcf.gz
+
         """
 
 

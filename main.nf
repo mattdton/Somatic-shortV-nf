@@ -115,7 +115,7 @@ workflow {
 	checkInputs(Channel.fromPath(params.input, checkIfExists: true))
 	
   // Original - all files are placed in a specific folder
-  // bam_pair_ch=Channel.fromFilePairs( params.bams )
+  //bam_pair_ch=Channel.fromFilePairs( params.bams )
 
   // Split cohort file to collect info for each sample
 	bam_pair_ch = checkInputs.out
@@ -125,37 +125,39 @@ workflow {
 
 
 
-	# Run the processes 
+	//Run the processes 
 	
   // Run mutect2 on a Tumor/Normal sample-pair
-  mutect2(params.ponvcf,params.ponvcf+'.tbi',bam_pair_ch,intervalList,base_path,refdir_path)
+  // For initial testing PoN is omitted 
+  //mutect2(params.ponvcf,params.ponvcf+'.tbi',bam_pair_ch,intervalList,base_path,refdir_path)
+  mutect2(bam_pair_ch,intervalList)
 
   // Gather multiple VCF files from a scatter operation into a single VCF file
-	GatherVcfs_step(mutect2.out[0].collect(),bam_pair_ch)
+	//GatherVcfs_step(mutect2.out[0].collect(),bam_pair_ch)
 
   // Combine the stats files across the scattered Mutect2 run
-	MergeMutectStats(bam_pair_ch,GatherVcfs_step.out[0].collect(),base_path)
+	//MergeMutectStats(bam_pair_ch,GatherVcfs_step.out[0].collect(),base_path)
 
   // Run the gatk LearnReadOrientationModel 
-	LearnReadOrientationModel(MergeMutectStats.out[1].collect(),bam_pair_ch,base_path)
+	//LearnReadOrientationModel(MergeMutectStats.out[1].collect(),bam_pair_ch,base_path)
 
   // Tabulate pileup metrics for inferring contamination - Tumor samples
-	GetPileupSummaries_T(params.common_biallelic_path,params.common_biallelic_path+'.tbi', bam_pair_ch,LearnReadOrientationModel.out.collect())
+	//GetPileupSummaries_T(params.common_biallelic_path,params.common_biallelic_path+'.tbi', bam_pair_ch,LearnReadOrientationModel.out.collect())
 
   // Tabulate pileup metrics for inferring contamination - Normal samples
-  GetPileupSummaries_N(params.common_biallelic_path,params.common_biallelic_path+'.tbi',bam_pair_ch,LearnReadOrientationModel.out.collect())
+  //GetPileupSummaries_N(params.common_biallelic_path,params.common_biallelic_path+'.tbi',bam_pair_ch,LearnReadOrientationModel.out.collect())
 
   // Calculate the fraction of reads coming from cross-sample contamination
-	CalculateContamination(bam_pair_ch,GetPileupSummaries_T.out.collect(),GetPileupSummaries_N.out.collect())
+	//CalculateContamination(bam_pair_ch,GetPileupSummaries_T.out.collect(),GetPileupSummaries_N.out.collect())
 
   // Filter somatic SNVs and indels called by Mutect2
-	FilterMutectCalls(bam_pair_ch,CalculateContamination.out[0].collect(),params.outdir)	
+	//FilterMutectCalls(bam_pair_ch,CalculateContamination.out[0].collect(),params.outdir)	
 
   // Select a subset of variants from a VCF file 
-	getFilteredVariants(bam_pair_ch,FilterMutectCalls.out.collect(),params.outdir,refdir_path)
+	//getFilteredVariants(bam_pair_ch,FilterMutectCalls.out.collect(),params.outdir,refdir_path)
 
   // Annotate the above subsetted VCF file using snpEff
-  annotate_with_snpEff(bam_pair_ch,getFilteredVariants.out)
+  //annotate_with_snpEff(bam_pair_ch,getFilteredVariants.out)
 
 	}}
 
