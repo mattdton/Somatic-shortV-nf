@@ -1,0 +1,63 @@
+process	name	status	queue	realtime	cpus	%cpu	memory	%mem	rss	env
+checkInputs	checkInputs (1)	CACHED	-	56ms	1	40.3%	-	0.0%	2.9 MB	PATH=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/bin:$PATH
+
+mutect2	mutect2 (Patient1 a)	CACHED	normal	1m 35s	1	94.1%	20 GB	0.2%	381.8 MB	PATH=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/bin:$PATH
+
+mutect2	mutect2 (Patient1 b)	CACHED	normal	1m 9s	1	94.6%	20 GB	0.2%	388.3 MB	PATH=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/bin:$PATH
+
+mutect2	mutect2 (Patient1 d)	CACHED	normal	50.2s	1	95.2%	20 GB	0.2%	329.8 MB	PATH=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/bin:$PATH
+
+mutect2	mutect2 (Patient1 c)	CACHED	normal	1m 15s	1	95.6%	20 GB	0.2%	352.7 MB	PATH=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/bin:$PATH
+
+mutect2	mutect2 (Patient1 e)	CACHED	normal	1m 8s	1	95.2%	20 GB	0.2%	350.6 MB	PATH=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/bin:$PATH
+
+mutect2	mutect2 (Patient1 f)	CACHED	normal	54.1s	1	94.1%	20 GB	0.2%	348.6 MB	PATH=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/bin:$PATH
+
+mutect2	mutect2 (Patient1 g)	CACHED	normal	1m 9s	1	95.3%	20 GB	0.2%	361.7 MB	PATH=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/bin:$PATH
+
+mutect2	mutect2 (Patient1 i)	CACHED	normal	49s	1	94.7%	20 GB	0.2%	341.7 MB	PATH=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/bin:$PATH
+
+mutect2	mutect2 (Patient1 j)	CACHED	normal	51.2s	1	95.2%	20 GB	0.2%	364.9 MB	PATH=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/bin:$PATH
+
+mutect2	mutect2 (Patient1 k)	CACHED	normal	54.8s	1	95.2%	20 GB	0.2%	349.7 MB	PATH=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/bin:$PATH
+
+mutect2	mutect2 (Patient1 l)	CACHED	normal	53s	1	92.5%	20 GB	0.2%	349.8 MB	PATH=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/bin:$PATH
+
+mutect2	mutect2 (Patient1 h)	CACHED	normal	1m 3s	1	88.9%	20 GB	0.2%	345.1 MB	PATH=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/bin:$PATH
+
+mutect2	mutect2 (Patient1 n)	CACHED	normal	44.4s	1	91.9%	20 GB	0.2%	321.9 MB	PATH=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/bin:$PATH
+
+mutect2	mutect2 (Patient1 m)	CACHED	normal	38.4s	1	92.6%	20 GB	0.2%	325.2 MB	PATH=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/bin:$PATH
+
+mutect2	mutect2 (Patient2 b)	CACHED	normal	1m 20s	1	86.4%	20 GB	0.2%	359.3 MB	PATH=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/bin:$PATH
+
+mutect2	mutect2 (Patient2 a)	CACHED	normal	1m 16s	1	95.7%	20 GB	0.2%	390.8 MB	PATH=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/bin:$PATH
+
+mutect2	mutect2 (Patient2 d)	CACHED	normal	49s	1	92.8%	20 GB	0.2%	330.3 MB	PATH=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/bin:$PATH
+
+mutect2	mutect2 (Patient2 c)	CACHED	normal	1m 9s	1	94.5%	20 GB	0.2%	356.4 MB	PATH=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/bin:$PATH
+
+mutect2	mutect2 (Patient2 e)	CACHED	normal	1m 13s	1	96.0%	20 GB	0.2%	353.5 MB	PATH=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/bin:$PATH
+
+mutect2	mutect2 (Patient2 f)	CACHED	normal	50.9s	1	95.8%	20 GB	0.2%	344 MB	PATH=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/bin:$PATH
+
+mutect2	mutect2 (Patient2 h)	CACHED	normal	57.2s	1	96.0%	20 GB	0.2%	345.4 MB	PATH=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/bin:$PATH
+
+mutect2	mutect2 (Patient2 g)	CACHED	normal	1m 9s	1	95.6%	20 GB	0.2%	344.2 MB	PATH=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/bin:$PATH
+
+mutect2	mutect2 (Patient2 i)	CACHED	normal	50.5s	1	94.6%	20 GB	0.2%	343.8 MB	PATH=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/bin:$PATH
+
+mutect2	mutect2 (Patient2 j)	CACHED	normal	55.5s	1	93.7%	20 GB	0.2%	343.2 MB	PATH=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/bin:$PATH
+
+mutect2	mutect2 (Patient2 k)	CACHED	normal	55.1s	1	94.5%	20 GB	0.2%	361.1 MB	PATH=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/bin:$PATH
+
+mutect2	mutect2 (Patient2 l)	CACHED	normal	50.3s	1	95.0%	20 GB	0.2%	349.1 MB	PATH=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/bin:$PATH
+
+mutect2	mutect2 (Patient2 m)	CACHED	normal	38.4s	1	94.5%	20 GB	0.2%	317.2 MB	PATH=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/bin:$PATH
+
+mutect2	mutect2 (Patient2 n)	CACHED	normal	48.6s	1	94.0%	20 GB	0.2%	358.6 MB	PATH=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/bin:$PATH
+
+GatherVcfs_step	GatherVcfs_step (GatherVcfs_step Patient2)	FAILED	normal	9.9s	1	-	20 GB	-	-	PATH=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/bin:$PATH
+
+GatherVcfs_step	GatherVcfs_step (GatherVcfs_step Patient1)	ABORTED	normal	-	1	-	20 GB	-	-	PATH=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/bin:$PATH
+

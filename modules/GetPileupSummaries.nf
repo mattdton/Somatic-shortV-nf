@@ -3,13 +3,13 @@
 /// To use DSL-2 will need to include this
 nextflow.enable.dsl=2
 
-container "${params.gatk4__container}"
+//container "${params.gatk4__container}"
 
 process GetPileupSummaries_T {
 
 
         tag "GetPileupSummaries $bam_id"
-        publishDir "$params.outdirB/", mode:'copy'
+        publishDir "${params.outDir}", mode:'copy'
 
 
         input:
@@ -18,7 +18,7 @@ process GetPileupSummaries_T {
 
 		tuple val(bam_id) , file(bam_N), file(bam_T)
 
-                path f1r2Args_T
+                
 
 
         output:
@@ -26,7 +26,8 @@ process GetPileupSummaries_T {
 
         shell:
         '''
-        gatk --java-options "-Xmx56g -XX:ParallelGCThreads=2" \
+        
+        gatk --java-options "-Xmx10g -XX:ParallelGCThreads=2" \
                 GetPileupSummaries \
                 -I !{bam_T} \
                 -V !{common_biallelic} \
@@ -46,7 +47,7 @@ process GetPileupSummaries_N {
 
 
         tag "GetPileupSummaries $bam_id"
-        publishDir "$params.outdirB/", mode:'copy'
+        publishDir "${params.outDir}", mode:'copy'
 
 
         input:
@@ -55,9 +56,6 @@ process GetPileupSummaries_N {
 
 		tuple val(bam_id) , file(bam_N), file(bam_T)
 
-                path f1r2Args_N
-
-
         output:
                 path ("${bam_id}-N.pileups.table")
 
@@ -65,7 +63,7 @@ process GetPileupSummaries_N {
         shell:
         '''
 
-        gatk --java-options "-Xmx56g -XX:ParallelGCThreads=2" \
+        gatk --java-options "-Xmx10g -XX:ParallelGCThreads=2" \
                 GetPileupSummaries \
                 -I !{bam_N} \
                 -V !{common_biallelic} \

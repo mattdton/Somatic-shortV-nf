@@ -1,0 +1,133 @@
+WARNING: Skipping mount /opt/nci/singularity/3.11.3/var/singularity/mnt/session/etc/resolv.conf [files]: /etc/resolv.conf doesn't exist in container
+02:59:28.493 INFO  NativeLibraryLoader - Loading libgkl_compression.so from jar:file:/usr/local/share/gatk4-4.1.4.1-0/gatk-package-4.1.4.1-local.jar!/com/intel/gkl/native/libgkl_compression.so
+Dec 08, 2023 2:59:28 AM shaded.cloud_nio.com.google.auth.oauth2.ComputeEngineCredentials runningOnComputeEngine
+INFO: Failed to detect whether we are running on Google Compute Engine.
+02:59:28.957 INFO  LearnReadOrientationModel - ------------------------------------------------------------
+02:59:28.957 INFO  LearnReadOrientationModel - The Genome Analysis Toolkit (GATK) v4.1.4.1
+02:59:28.957 INFO  LearnReadOrientationModel - For support and documentation go to https://software.broadinstitute.org/gatk/
+02:59:28.957 INFO  LearnReadOrientationModel - Executing as npd561@gadi-cpu-clx-2951.gadi.nci.org.au on Linux v4.18.0-477.27.1.el8.nci.x86_64 amd64
+02:59:28.957 INFO  LearnReadOrientationModel - Java runtime: OpenJDK 64-Bit Server VM v1.8.0_192-b01
+02:59:28.957 INFO  LearnReadOrientationModel - Start Date/Time: December 8, 2023 2:59:28 AM GMT
+02:59:28.957 INFO  LearnReadOrientationModel - ------------------------------------------------------------
+02:59:28.957 INFO  LearnReadOrientationModel - ------------------------------------------------------------
+02:59:28.958 INFO  LearnReadOrientationModel - HTSJDK Version: 2.21.0
+02:59:28.958 INFO  LearnReadOrientationModel - Picard Version: 2.21.2
+02:59:28.958 INFO  LearnReadOrientationModel - HTSJDK Defaults.COMPRESSION_LEVEL : 2
+02:59:28.958 INFO  LearnReadOrientationModel - HTSJDK Defaults.USE_ASYNC_IO_READ_FOR_SAMTOOLS : false
+02:59:28.958 INFO  LearnReadOrientationModel - HTSJDK Defaults.USE_ASYNC_IO_WRITE_FOR_SAMTOOLS : true
+02:59:28.958 INFO  LearnReadOrientationModel - HTSJDK Defaults.USE_ASYNC_IO_WRITE_FOR_TRIBBLE : false
+02:59:28.958 INFO  LearnReadOrientationModel - Deflater: IntelDeflater
+02:59:28.958 INFO  LearnReadOrientationModel - Inflater: IntelInflater
+02:59:28.958 INFO  LearnReadOrientationModel - GCS max retries/reopens: 20
+02:59:28.958 INFO  LearnReadOrientationModel - Requester pays: disabled
+02:59:28.958 INFO  LearnReadOrientationModel - Initializing engine
+02:59:28.958 INFO  LearnReadOrientationModel - Done initializing engine
+02:59:28.964 INFO  IOUtils - Extracting data from archive: file:///scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/work/a6/b80c9cbe6bd94c872786af7a152455/Patient2-T_Patient2-N.f1r2.a.tar.gz
+02:59:28.989 INFO  IOUtils - Extracting file: ./Patient2-T.alt_histogram
+02:59:28.992 INFO  IOUtils - Extracting file: ./Patient2-T.ref_histogram
+02:59:28.993 INFO  IOUtils - Extracting file: ./Patient2-T.alt_table
+02:59:28.994 INFO  IOUtils - Extracting data from archive: file:///scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/work/a6/b80c9cbe6bd94c872786af7a152455/Patient2-T_Patient2-N.f1r2.b.tar.gz
+02:59:29.012 INFO  IOUtils - Extracting file: ./Patient2-T.alt_histogram
+02:59:29.013 INFO  IOUtils - Extracting file: ./Patient2-T.ref_histogram
+02:59:29.013 INFO  IOUtils - Extracting file: ./Patient2-T.alt_table
+02:59:29.014 INFO  IOUtils - Extracting data from archive: file:///scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/work/a6/b80c9cbe6bd94c872786af7a152455/Patient2-T_Patient2-N.f1r2.c.tar.gz
+02:59:29.025 INFO  IOUtils - Extracting file: ./Patient2-T.alt_histogram
+02:59:29.026 INFO  IOUtils - Extracting file: ./Patient2-T.ref_histogram
+02:59:29.026 INFO  IOUtils - Extracting file: ./Patient2-T.alt_table
+02:59:29.027 INFO  IOUtils - Extracting data from archive: file:///scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/work/a6/b80c9cbe6bd94c872786af7a152455/Patient2-T_Patient2-N.f1r2.d.tar.gz
+02:59:29.040 INFO  IOUtils - Extracting file: ./Patient2-T.alt_histogram
+02:59:29.041 INFO  IOUtils - Extracting file: ./Patient2-T.ref_histogram
+02:59:29.041 INFO  IOUtils - Extracting file: ./Patient2-T.alt_table
+02:59:29.042 INFO  IOUtils - Extracting data from archive: file:///scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/work/a6/b80c9cbe6bd94c872786af7a152455/Patient2-T_Patient2-N.f1r2.e.tar.gz
+02:59:29.058 INFO  IOUtils - Extracting file: ./Patient2-T.alt_histogram
+02:59:29.058 INFO  IOUtils - Extracting file: ./Patient2-T.ref_histogram
+02:59:29.059 INFO  IOUtils - Extracting file: ./Patient2-T.alt_table
+02:59:29.060 INFO  IOUtils - Extracting data from archive: file:///scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/work/a6/b80c9cbe6bd94c872786af7a152455/Patient2-T_Patient2-N.f1r2.f.tar.gz
+02:59:29.081 INFO  IOUtils - Extracting file: ./Patient2-T.alt_histogram
+02:59:29.082 INFO  IOUtils - Extracting file: ./Patient2-T.ref_histogram
+02:59:29.082 INFO  IOUtils - Extracting file: ./Patient2-T.alt_table
+02:59:29.084 INFO  IOUtils - Extracting data from archive: file:///scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/work/a6/b80c9cbe6bd94c872786af7a152455/Patient2-T_Patient2-N.f1r2.g.tar.gz
+02:59:29.102 INFO  IOUtils - Extracting file: ./Patient2-T.alt_histogram
+02:59:29.102 INFO  IOUtils - Extracting file: ./Patient2-T.ref_histogram
+02:59:29.102 INFO  IOUtils - Extracting file: ./Patient2-T.alt_table
+02:59:29.103 INFO  IOUtils - Extracting data from archive: file:///scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/work/a6/b80c9cbe6bd94c872786af7a152455/Patient2-T_Patient2-N.f1r2.h.tar.gz
+02:59:29.119 INFO  IOUtils - Extracting file: ./Patient2-T.alt_histogram
+02:59:29.120 INFO  IOUtils - Extracting file: ./Patient2-T.ref_histogram
+02:59:29.120 INFO  IOUtils - Extracting file: ./Patient2-T.alt_table
+02:59:29.122 INFO  IOUtils - Extracting data from archive: file:///scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/work/a6/b80c9cbe6bd94c872786af7a152455/Patient2-T_Patient2-N.f1r2.i.tar.gz
+02:59:29.132 INFO  IOUtils - Extracting file: ./Patient2-T.alt_histogram
+02:59:29.133 INFO  IOUtils - Extracting file: ./Patient2-T.ref_histogram
+02:59:29.133 INFO  IOUtils - Extracting file: ./Patient2-T.alt_table
+02:59:29.135 INFO  IOUtils - Extracting data from archive: file:///scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/work/a6/b80c9cbe6bd94c872786af7a152455/Patient2-T_Patient2-N.f1r2.j.tar.gz
+02:59:29.148 INFO  IOUtils - Extracting file: ./Patient2-T.alt_histogram
+02:59:29.149 INFO  IOUtils - Extracting file: ./Patient2-T.ref_histogram
+02:59:29.149 INFO  IOUtils - Extracting file: ./Patient2-T.alt_table
+02:59:29.150 INFO  IOUtils - Extracting data from archive: file:///scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/work/a6/b80c9cbe6bd94c872786af7a152455/Patient2-T_Patient2-N.f1r2.k.tar.gz
+02:59:29.160 INFO  IOUtils - Extracting file: ./Patient2-T.alt_histogram
+02:59:29.162 INFO  IOUtils - Extracting file: ./Patient2-T.ref_histogram
+02:59:29.167 INFO  IOUtils - Extracting file: ./Patient2-T.alt_table
+02:59:29.174 INFO  IOUtils - Extracting data from archive: file:///scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/work/a6/b80c9cbe6bd94c872786af7a152455/Patient2-T_Patient2-N.f1r2.l.tar.gz
+02:59:29.214 INFO  IOUtils - Extracting file: ./Patient2-T.alt_histogram
+02:59:29.216 INFO  IOUtils - Extracting file: ./Patient2-T.ref_histogram
+02:59:29.216 INFO  IOUtils - Extracting file: ./Patient2-T.alt_table
+02:59:29.220 INFO  IOUtils - Extracting data from archive: file:///scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/work/a6/b80c9cbe6bd94c872786af7a152455/Patient2-T_Patient2-N.f1r2.m.tar.gz
+02:59:29.240 INFO  IOUtils - Extracting file: ./Patient2-T.alt_histogram
+02:59:29.241 INFO  IOUtils - Extracting file: ./Patient2-T.ref_histogram
+02:59:29.243 INFO  IOUtils - Extracting file: ./Patient2-T.alt_table
+02:59:29.244 INFO  IOUtils - Extracting data from archive: file:///scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/work/a6/b80c9cbe6bd94c872786af7a152455/Patient2-T_Patient2-N.f1r2.n.tar.gz
+02:59:29.257 INFO  IOUtils - Extracting file: ./Patient2-T.alt_histogram
+02:59:29.266 INFO  IOUtils - Extracting file: ./Patient2-T.ref_histogram
+02:59:29.267 INFO  IOUtils - Extracting file: ./Patient2-T.alt_table
+02:59:32.423 INFO  LearnReadOrientationModel - Context AAC: with 252846 ref and 201 alt examples, EM failed to converge within 20 steps
+02:59:33.295 INFO  LearnReadOrientationModel - Context AAG: with 366546 ref and 205 alt examples, EM failed to converge within 20 steps
+02:59:33.995 INFO  LearnReadOrientationModel - Context AAT: with 401297 ref and 290 alt examples, EM failed to converge within 20 steps
+02:59:34.478 INFO  LearnReadOrientationModel - Context ACA: with 352186 ref and 483 alt examples, EM failed to converge within 20 steps
+02:59:34.986 INFO  LearnReadOrientationModel - Context ACC: with 217691 ref and 235 alt examples, EM failed to converge within 20 steps
+02:59:35.468 INFO  LearnReadOrientationModel - Context ACG: with 56459 ref and 363 alt examples, EM failed to converge within 20 steps
+02:59:35.942 INFO  LearnReadOrientationModel - Context ACT: with 279172 ref and 331 alt examples, EM failed to converge within 20 steps
+02:59:36.504 INFO  LearnReadOrientationModel - Context AGA: with 389518 ref and 477 alt examples, EM failed to converge within 20 steps
+02:59:36.990 INFO  LearnReadOrientationModel - Context AGC: with 258693 ref and 235 alt examples, EM failed to converge within 20 steps
+02:59:37.491 INFO  LearnReadOrientationModel - Context AGG: with 328179 ref and 769 alt examples, EM failed to converge within 20 steps
+02:59:38.025 INFO  LearnReadOrientationModel - Context ATA: with 322855 ref and 396 alt examples, EM failed to converge within 20 steps
+02:59:38.511 INFO  LearnReadOrientationModel - Context ATC: with 235507 ref and 215 alt examples, EM failed to converge within 20 steps
+02:59:38.995 INFO  LearnReadOrientationModel - Context ATG: with 321045 ref and 447 alt examples, EM failed to converge within 20 steps
+02:59:39.499 INFO  LearnReadOrientationModel - Context CAA: with 326275 ref and 243 alt examples, EM failed to converge within 20 steps
+02:59:39.984 INFO  LearnReadOrientationModel - Context CAC: with 265221 ref and 304 alt examples, EM failed to converge within 20 steps
+02:59:40.457 INFO  LearnReadOrientationModel - Context CAG: with 377704 ref and 340 alt examples, EM failed to converge within 20 steps
+02:59:40.956 INFO  LearnReadOrientationModel - Context CCA: with 339434 ref and 846 alt examples, EM failed to converge within 20 steps
+02:59:41.448 INFO  LearnReadOrientationModel - Context CCC: with 253208 ref and 583 alt examples, EM failed to converge within 20 steps
+02:59:41.922 INFO  LearnReadOrientationModel - Context CCG: with 66492 ref and 406 alt examples, EM failed to converge within 20 steps
+02:59:42.394 INFO  LearnReadOrientationModel - Context CGA: with 52358 ref and 213 alt examples, EM failed to converge within 20 steps
+02:59:42.916 INFO  LearnReadOrientationModel - Context CGC: with 54141 ref and 244 alt examples, EM failed to converge within 20 steps
+02:59:43.396 INFO  LearnReadOrientationModel - Context CTA: with 207108 ref and 159 alt examples, EM failed to converge within 20 steps
+02:59:43.867 INFO  LearnReadOrientationModel - Context CTC: with 298414 ref and 197 alt examples, EM failed to converge within 20 steps
+02:59:44.357 INFO  LearnReadOrientationModel - Context GAA: with 362613 ref and 208 alt examples, EM failed to converge within 20 steps
+02:59:44.868 INFO  LearnReadOrientationModel - Context GAC: with 177160 ref and 156 alt examples, EM failed to converge within 20 steps
+02:59:45.339 INFO  LearnReadOrientationModel - Context GCA: with 264990 ref and 277 alt examples, EM failed to converge within 20 steps
+02:59:45.825 INFO  LearnReadOrientationModel - Context GCC: with 225406 ref and 254 alt examples, EM failed to converge within 20 steps
+02:59:46.310 INFO  LearnReadOrientationModel - Context GGA: with 293519 ref and 351 alt examples, EM failed to converge within 20 steps
+02:59:46.810 INFO  LearnReadOrientationModel - Context GTA: with 196745 ref and 159 alt examples, EM failed to converge within 20 steps
+02:59:47.280 INFO  LearnReadOrientationModel - Context TAA: with 339840 ref and 233 alt examples, EM failed to converge within 20 steps
+02:59:47.752 INFO  LearnReadOrientationModel - Context TCA: with 348365 ref and 385 alt examples, EM failed to converge within 20 steps
+02:59:48.225 INFO  LearnReadOrientationModel - Context AAA: with 620131 ref and 322 alt examples, EM failed to converge within 20 steps
+02:59:48.259 INFO  LearnReadOrientationModel - Shutting down engine
+[December 8, 2023 2:59:48 AM GMT] org.broadinstitute.hellbender.tools.walkers.readorientation.LearnReadOrientationModel done. Elapsed time: 0.33 minutes.
+Runtime.totalMemory()=2076049408
+Tool returned:
+SUCCESS
+Using GATK jar /usr/local/share/gatk4-4.1.4.1-0/gatk-package-4.1.4.1-local.jar
+Running:
+    java -Dsamjdk.use_async_io_read_samtools=false -Dsamjdk.use_async_io_write_samtools=true -Dsamjdk.use_async_io_write_tribble=false -Dsamjdk.compression_level=2 -Xmx10g -jar /usr/local/share/gatk4-4.1.4.1-0/gatk-package-4.1.4.1-local.jar LearnReadOrientationModel --input Patient2-T_Patient2-N.unfiltered_f1r2.args -O Patient2-T_Patient2-N.read-orientation-model.tar.gz
+
+======================================================================================
+                  Resource Usage on 2023-12-08 13:59:58:
+   Job Id:             103607450.gadi-pbs
+   Project:            er01
+   Exit Status:        0
+   Service Units:      0.07
+   NCPUs Requested:    1                      NCPUs Used: 1               
+                                           CPU Time Used: 00:00:23        
+   Memory Requested:   20.0GB                Memory Used: 891.08MB        
+   Walltime requested: 01:00:00            Walltime Used: 00:00:27        
+   JobFS requested:    30.0GB                 JobFS used: 0B              
+======================================================================================

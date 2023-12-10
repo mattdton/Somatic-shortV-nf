@@ -1,0 +1,71 @@
+WARNING: Skipping mount /opt/nci/singularity/3.11.3/var/singularity/mnt/session/etc/resolv.conf [files]: /etc/resolv.conf doesn't exist in container
+09:26:48.539 INFO  NativeLibraryLoader - Loading libgkl_compression.so from jar:file:/usr/local/share/gatk4-4.1.4.1-0/gatk-package-4.1.4.1-local.jar!/com/intel/gkl/native/libgkl_compression.so
+Dec 08, 2023 9:26:48 AM shaded.cloud_nio.com.google.auth.oauth2.ComputeEngineCredentials runningOnComputeEngine
+INFO: Failed to detect whether we are running on Google Compute Engine.
+09:26:48.951 INFO  Mutect2 - ------------------------------------------------------------
+09:26:48.951 INFO  Mutect2 - The Genome Analysis Toolkit (GATK) v4.1.4.1
+09:26:48.951 INFO  Mutect2 - For support and documentation go to https://software.broadinstitute.org/gatk/
+09:26:48.952 INFO  Mutect2 - Executing as npd561@gadi-cpu-clx-1192.gadi.nci.org.au on Linux v4.18.0-477.27.1.el8.nci.x86_64 amd64
+09:26:48.952 INFO  Mutect2 - Java runtime: OpenJDK 64-Bit Server VM v1.8.0_192-b01
+09:26:48.952 INFO  Mutect2 - Start Date/Time: December 8, 2023 9:26:48 AM GMT
+09:26:48.952 INFO  Mutect2 - ------------------------------------------------------------
+09:26:48.952 INFO  Mutect2 - ------------------------------------------------------------
+09:26:48.952 INFO  Mutect2 - HTSJDK Version: 2.21.0
+09:26:48.952 INFO  Mutect2 - Picard Version: 2.21.2
+09:26:48.952 INFO  Mutect2 - HTSJDK Defaults.COMPRESSION_LEVEL : 2
+09:26:48.952 INFO  Mutect2 - HTSJDK Defaults.USE_ASYNC_IO_READ_FOR_SAMTOOLS : false
+09:26:48.952 INFO  Mutect2 - HTSJDK Defaults.USE_ASYNC_IO_WRITE_FOR_SAMTOOLS : true
+09:26:48.952 INFO  Mutect2 - HTSJDK Defaults.USE_ASYNC_IO_WRITE_FOR_TRIBBLE : false
+09:26:48.952 INFO  Mutect2 - Deflater: IntelDeflater
+09:26:48.952 INFO  Mutect2 - Inflater: IntelInflater
+09:26:48.952 INFO  Mutect2 - GCS max retries/reopens: 20
+09:26:48.953 INFO  Mutect2 - Requester pays: disabled
+09:26:48.953 INFO  Mutect2 - Initializing engine
+WARNING	2023-12-08 09:26:49	SamFiles	The index file /scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Fastq-to-BAM_BASEDIR/Fastq-to-BAM/Dedup_sort/Patient1-T.coordSorted.dedup.bam.bai was found by resolving the canonical path of a symlink: /scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/work/69/8f28eca7ce82d10f7f303377342140/Patient1-T.coordSorted.dedup.bam -> /scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Fastq-to-BAM_BASEDIR/Fastq-to-BAM/Dedup_sort/Patient1-T.coordSorted.dedup.bam
+WARNING	2023-12-08 09:26:49	SamFiles	The index file /scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Fastq-to-BAM_BASEDIR/Fastq-to-BAM/Dedup_sort/Patient1-N.coordSorted.dedup.bam.bai was found by resolving the canonical path of a symlink: /scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/work/69/8f28eca7ce82d10f7f303377342140/Patient1-N.coordSorted.dedup.bam -> /scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Fastq-to-BAM_BASEDIR/Fastq-to-BAM/Dedup_sort/Patient1-N.coordSorted.dedup.bam
+09:26:49.903 INFO  IntervalArgumentCollection - Initial include intervals span 264537851 loci; exclude intervals span 16569 loci
+09:26:49.905 INFO  IntervalArgumentCollection - Excluding 0 loci from original intervals (0.00% reduction)
+09:26:49.905 INFO  IntervalArgumentCollection - Processing 264537851 bp from intervals
+09:26:49.940 INFO  Mutect2 - Done initializing engine
+09:26:50.060 INFO  NativeLibraryLoader - Loading libgkl_utils.so from jar:file:/usr/local/share/gatk4-4.1.4.1-0/gatk-package-4.1.4.1-local.jar!/com/intel/gkl/native/libgkl_utils.so
+09:26:50.064 INFO  NativeLibraryLoader - Loading libgkl_pairhmm_omp.so from jar:file:/usr/local/share/gatk4-4.1.4.1-0/gatk-package-4.1.4.1-local.jar!/com/intel/gkl/native/libgkl_pairhmm_omp.so
+09:26:50.108 INFO  IntelPairHmm - Using CPU-supported AVX-512 instructions
+09:26:50.108 INFO  IntelPairHmm - Flush-to-zero (FTZ) is enabled when running PairHMM
+09:26:50.108 INFO  IntelPairHmm - Available threads: 1
+09:26:50.108 INFO  IntelPairHmm - Requested threads: 4
+09:26:50.108 WARN  IntelPairHmm - Using 1 available threads, but 4 were requested
+09:26:50.108 INFO  PairHMM - Using the OpenMP multi-threaded AVX-accelerated native PairHMM implementation
+09:26:50.304 INFO  ProgressMeter - Starting traversal
+09:26:50.317 INFO  ProgressMeter -        Current Locus  Elapsed Minutes     Regions Processed   Regions/Minute
+09:27:00.328 INFO  ProgressMeter -        chr9:25230935              0.2                 58790         352387.6
+09:27:10.328 INFO  ProgressMeter -        chr9:68937833              0.3                204780         614002.3
+09:27:20.328 INFO  ProgressMeter -       chr9:105676219              0.5                327710         655179.8
+09:27:30.337 INFO  ProgressMeter -        chr10:1029714              0.7                440780         660839.6
+09:27:40.337 INFO  ProgressMeter -       chr10:26931534              0.8                527460         632698.9
+09:27:50.338 INFO  ProgressMeter -       chr10:70677170              1.0                673770         673545.5
+09:28:00.337 INFO  ProgressMeter -      chr10:113264485              1.2                816380         699554.4
+09:28:04.994 INFO  Mutect2 - 745 read(s) filtered by: (((((((((((MappingQualityReadFilter AND MappingQualityAvailableReadFilter) AND MappingQualityNotZeroReadFilter) AND MappedReadFilter) AND NotSecondaryAlignmentReadFilter) AND NotDuplicateReadFilter) AND PassesVendorQualityCheckReadFilter) AND NonChimericOriginalAlignmentReadFilter) AND NonZeroReferenceLengthAlignmentReadFilter) AND ReadLengthReadFilter) AND GoodCigarReadFilter) AND WellformedReadFilter)
+  745 read(s) filtered by: ((((((((((MappingQualityReadFilter AND MappingQualityAvailableReadFilter) AND MappingQualityNotZeroReadFilter) AND MappedReadFilter) AND NotSecondaryAlignmentReadFilter) AND NotDuplicateReadFilter) AND PassesVendorQualityCheckReadFilter) AND NonChimericOriginalAlignmentReadFilter) AND NonZeroReferenceLengthAlignmentReadFilter) AND ReadLengthReadFilter) AND GoodCigarReadFilter)
+      745 read(s) filtered by: (((((((((MappingQualityReadFilter AND MappingQualityAvailableReadFilter) AND MappingQualityNotZeroReadFilter) AND MappedReadFilter) AND NotSecondaryAlignmentReadFilter) AND NotDuplicateReadFilter) AND PassesVendorQualityCheckReadFilter) AND NonChimericOriginalAlignmentReadFilter) AND NonZeroReferenceLengthAlignmentReadFilter) AND ReadLengthReadFilter)
+          745 read(s) filtered by: ((((((((MappingQualityReadFilter AND MappingQualityAvailableReadFilter) AND MappingQualityNotZeroReadFilter) AND MappedReadFilter) AND NotSecondaryAlignmentReadFilter) AND NotDuplicateReadFilter) AND PassesVendorQualityCheckReadFilter) AND NonChimericOriginalAlignmentReadFilter) AND NonZeroReferenceLengthAlignmentReadFilter)
+              745 read(s) filtered by: (((((((MappingQualityReadFilter AND MappingQualityAvailableReadFilter) AND MappingQualityNotZeroReadFilter) AND MappedReadFilter) AND NotSecondaryAlignmentReadFilter) AND NotDuplicateReadFilter) AND PassesVendorQualityCheckReadFilter) AND NonChimericOriginalAlignmentReadFilter)
+                  745 read(s) filtered by: ((((((MappingQualityReadFilter AND MappingQualityAvailableReadFilter) AND MappingQualityNotZeroReadFilter) AND MappedReadFilter) AND NotSecondaryAlignmentReadFilter) AND NotDuplicateReadFilter) AND PassesVendorQualityCheckReadFilter)
+                      745 read(s) filtered by: (((((MappingQualityReadFilter AND MappingQualityAvailableReadFilter) AND MappingQualityNotZeroReadFilter) AND MappedReadFilter) AND NotSecondaryAlignmentReadFilter) AND NotDuplicateReadFilter)
+                          745 read(s) filtered by: ((((MappingQualityReadFilter AND MappingQualityAvailableReadFilter) AND MappingQualityNotZeroReadFilter) AND MappedReadFilter) AND NotSecondaryAlignmentReadFilter)
+                              740 read(s) filtered by: (((MappingQualityReadFilter AND MappingQualityAvailableReadFilter) AND MappingQualityNotZeroReadFilter) AND MappedReadFilter)
+                                  740 read(s) filtered by: ((MappingQualityReadFilter AND MappingQualityAvailableReadFilter) AND MappingQualityNotZeroReadFilter)
+                                      740 read(s) filtered by: (MappingQualityReadFilter AND MappingQualityAvailableReadFilter)
+                                          740 read(s) filtered by: MappingQualityReadFilter 
+                              5 read(s) filtered by: NotSecondaryAlignmentReadFilter 
+
+09:28:04.995 INFO  ProgressMeter -      chr10:133794910              1.2                885108         711139.6
+09:28:04.995 INFO  ProgressMeter - Traversal complete. Processed 885108 total regions in 1.2 minutes.
+09:28:05.176 INFO  VectorLoglessPairHMM - Time spent in setup for JNI call : 0.0042492730000000005
+09:28:05.176 INFO  PairHMM - Total compute time in PairHMM computeLogLikelihoods() : 0.069940954
+09:28:05.177 INFO  SmithWatermanAligner - Total compute time in java Smith-Waterman : 0.31 sec
+09:28:05.177 INFO  Mutect2 - Shutting down engine
+[December 8, 2023 9:28:05 AM GMT] org.broadinstitute.hellbender.tools.walkers.mutect.Mutect2 done. Elapsed time: 1.28 minutes.
+Runtime.totalMemory()=2076049408
+Using GATK jar /usr/local/share/gatk4-4.1.4.1-0/gatk-package-4.1.4.1-local.jar
+Running:
+    java -Dsamjdk.use_async_io_read_samtools=false -Dsamjdk.use_async_io_write_samtools=true -Dsamjdk.use_async_io_write_tribble=false -Dsamjdk.compression_level=2 -jar /usr/local/share/gatk4-4.1.4.1-0/gatk-package-4.1.4.1-local.jar Mutect2 -R /g/data/er01/SIH-HPC-WGS/Reference/hs38DH.fasta -I Patient1-T.coordSorted.dedup.bam -I Patient1-N.coordSorted.dedup.bam -normal Patient1-N --f1r2-tar-gz Patient1-T_Patient1-N.f1r2.g.tar.gz -XL chrM -L /scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/modules/scatter_files/100M_primary_interval_g.list -O Patient1-T_Patient1-N.unfiltered.g.vcf.gz

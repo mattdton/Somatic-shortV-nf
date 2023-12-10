@@ -1,0 +1,70 @@
+WARNING: Skipping mount /opt/nci/singularity/3.11.3/var/singularity/mnt/session/etc/resolv.conf [files]: /etc/resolv.conf doesn't exist in container
+03:02:30.406 INFO  NativeLibraryLoader - Loading libgkl_compression.so from jar:file:/usr/local/share/gatk4-4.1.4.1-0/gatk-package-4.1.4.1-local.jar!/com/intel/gkl/native/libgkl_compression.so
+Dec 08, 2023 3:02:30 AM shaded.cloud_nio.com.google.auth.oauth2.ComputeEngineCredentials runningOnComputeEngine
+INFO: Failed to detect whether we are running on Google Compute Engine.
+03:02:30.759 INFO  IndexFeatureFile - ------------------------------------------------------------
+03:02:30.760 INFO  IndexFeatureFile - The Genome Analysis Toolkit (GATK) v4.1.4.1
+03:02:30.760 INFO  IndexFeatureFile - For support and documentation go to https://software.broadinstitute.org/gatk/
+03:02:30.761 INFO  IndexFeatureFile - Executing as npd561@gadi-dm-06.gadi.nci.org.au on Linux v4.18.0-477.27.1.el8.nci.x86_64 amd64
+03:02:30.761 INFO  IndexFeatureFile - Java runtime: OpenJDK 64-Bit Server VM v1.8.0_192-b01
+03:02:30.761 INFO  IndexFeatureFile - Start Date/Time: December 8, 2023 3:02:30 AM GMT
+03:02:30.761 INFO  IndexFeatureFile - ------------------------------------------------------------
+03:02:30.761 INFO  IndexFeatureFile - ------------------------------------------------------------
+03:02:30.761 INFO  IndexFeatureFile - HTSJDK Version: 2.21.0
+03:02:30.767 INFO  IndexFeatureFile - Picard Version: 2.21.2
+03:02:30.767 INFO  IndexFeatureFile - HTSJDK Defaults.COMPRESSION_LEVEL : 2
+03:02:30.767 INFO  IndexFeatureFile - HTSJDK Defaults.USE_ASYNC_IO_READ_FOR_SAMTOOLS : false
+03:02:30.767 INFO  IndexFeatureFile - HTSJDK Defaults.USE_ASYNC_IO_WRITE_FOR_SAMTOOLS : true
+03:02:30.767 INFO  IndexFeatureFile - HTSJDK Defaults.USE_ASYNC_IO_WRITE_FOR_TRIBBLE : false
+03:02:30.767 INFO  IndexFeatureFile - Deflater: IntelDeflater
+03:02:30.767 INFO  IndexFeatureFile - Inflater: IntelInflater
+03:02:30.767 INFO  IndexFeatureFile - GCS max retries/reopens: 20
+03:02:30.767 INFO  IndexFeatureFile - Requester pays: disabled
+03:02:30.767 INFO  IndexFeatureFile - Initializing engine
+03:02:30.767 INFO  IndexFeatureFile - Done initializing engine
+03:02:31.186 INFO  FeatureManager - Using codec VCFCodec to read file file:///scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/work/c3/83cda13a10119fd7253fb4e71629ea/Patient2-T_Patient2-N.filtered.vcf.gz
+03:02:31.282 INFO  ProgressMeter - Starting traversal
+03:02:31.283 INFO  ProgressMeter -        Current Locus  Elapsed Minutes     Records Processed   Records/Minute
+03:02:31.293 INFO  ProgressMeter -             unmapped              0.0                     2          15000.0
+03:02:31.299 INFO  ProgressMeter - Traversal complete. Processed 2 total records in 0.0 minutes.
+03:02:31.314 INFO  IndexFeatureFile - Successfully wrote index to /scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/work/c3/83cda13a10119fd7253fb4e71629ea/Patient2-T_Patient2-N.filtered.vcf.gz.tbi
+03:02:31.314 INFO  IndexFeatureFile - Shutting down engine
+[December 8, 2023 3:02:31 AM GMT] org.broadinstitute.hellbender.tools.IndexFeatureFile done. Elapsed time: 0.02 minutes.
+Runtime.totalMemory()=2076049408
+Using GATK jar /usr/local/share/gatk4-4.1.4.1-0/gatk-package-4.1.4.1-local.jar
+Running:
+    java -Dsamjdk.use_async_io_read_samtools=false -Dsamjdk.use_async_io_write_samtools=true -Dsamjdk.use_async_io_write_tribble=false -Dsamjdk.compression_level=2 -jar /usr/local/share/gatk4-4.1.4.1-0/gatk-package-4.1.4.1-local.jar IndexFeatureFile --input Patient2-T_Patient2-N.filtered.vcf.gz
+03:02:34.121 INFO  NativeLibraryLoader - Loading libgkl_compression.so from jar:file:/usr/local/share/gatk4-4.1.4.1-0/gatk-package-4.1.4.1-local.jar!/com/intel/gkl/native/libgkl_compression.so
+Dec 08, 2023 3:02:34 AM shaded.cloud_nio.com.google.auth.oauth2.ComputeEngineCredentials runningOnComputeEngine
+INFO: Failed to detect whether we are running on Google Compute Engine.
+03:02:34.454 INFO  SelectVariants - ------------------------------------------------------------
+03:02:34.454 INFO  SelectVariants - The Genome Analysis Toolkit (GATK) v4.1.4.1
+03:02:34.454 INFO  SelectVariants - For support and documentation go to https://software.broadinstitute.org/gatk/
+03:02:34.454 INFO  SelectVariants - Executing as npd561@gadi-dm-06.gadi.nci.org.au on Linux v4.18.0-477.27.1.el8.nci.x86_64 amd64
+03:02:34.454 INFO  SelectVariants - Java runtime: OpenJDK 64-Bit Server VM v1.8.0_192-b01
+03:02:34.454 INFO  SelectVariants - Start Date/Time: December 8, 2023 3:02:34 AM GMT
+03:02:34.454 INFO  SelectVariants - ------------------------------------------------------------
+03:02:34.454 INFO  SelectVariants - ------------------------------------------------------------
+03:02:34.455 INFO  SelectVariants - HTSJDK Version: 2.21.0
+03:02:34.455 INFO  SelectVariants - Picard Version: 2.21.2
+03:02:34.455 INFO  SelectVariants - HTSJDK Defaults.COMPRESSION_LEVEL : 2
+03:02:34.455 INFO  SelectVariants - HTSJDK Defaults.USE_ASYNC_IO_READ_FOR_SAMTOOLS : false
+03:02:34.455 INFO  SelectVariants - HTSJDK Defaults.USE_ASYNC_IO_WRITE_FOR_SAMTOOLS : true
+03:02:34.455 INFO  SelectVariants - HTSJDK Defaults.USE_ASYNC_IO_WRITE_FOR_TRIBBLE : false
+03:02:34.455 INFO  SelectVariants - Deflater: IntelDeflater
+03:02:34.455 INFO  SelectVariants - Inflater: IntelInflater
+03:02:34.455 INFO  SelectVariants - GCS max retries/reopens: 20
+03:02:34.455 INFO  SelectVariants - Requester pays: disabled
+03:02:34.455 INFO  SelectVariants - Initializing engine
+03:02:35.060 INFO  FeatureManager - Using codec VCFCodec to read file file:///scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/work/c3/83cda13a10119fd7253fb4e71629ea/Patient2-T_Patient2-N.filtered.vcf.gz
+03:02:35.259 INFO  SelectVariants - Done initializing engine
+03:02:35.424 INFO  ProgressMeter - Starting traversal
+03:02:35.425 INFO  ProgressMeter -        Current Locus  Elapsed Minutes    Variants Processed  Variants/Minute
+03:02:35.440 INFO  ProgressMeter -             unmapped              0.0                     2           8571.4
+03:02:35.448 INFO  ProgressMeter - Traversal complete. Processed 2 total variants in 0.0 minutes.
+03:02:35.463 INFO  SelectVariants - Shutting down engine
+[December 8, 2023 3:02:35 AM GMT] org.broadinstitute.hellbender.tools.walkers.variantutils.SelectVariants done. Elapsed time: 0.02 minutes.
+Runtime.totalMemory()=2076049408
+Using GATK jar /usr/local/share/gatk4-4.1.4.1-0/gatk-package-4.1.4.1-local.jar
+Running:
+    java -Dsamjdk.use_async_io_read_samtools=false -Dsamjdk.use_async_io_write_samtools=true -Dsamjdk.use_async_io_write_tribble=false -Dsamjdk.compression_level=2 -jar /usr/local/share/gatk4-4.1.4.1-0/gatk-package-4.1.4.1-local.jar SelectVariants -R /g/data/er01/SIH-HPC-WGS/Reference/hs38DH.fasta -V Patient2-T_Patient2-N.filtered.vcf.gz --exclude-filtered true -O Patient2-T_Patient2-N.filtered_only.vcf.gz

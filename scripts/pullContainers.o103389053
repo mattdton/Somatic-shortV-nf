@@ -1,0 +1,14 @@
+Job 103389053.gadi-pbs killed due to exceeding jobfs quota. Quota: 100.0MB, Used: 1.11GB, Host: gadi-dm-03
+
+======================================================================================
+                  Resource Usage on 2023-12-06 14:43:20:
+   Job Id:             103389053.gadi-pbs
+   Project:            er01
+   Exit Status:        271 (Linux Signal 15 SIGTERM Termination)
+   Service Units:      1.56
+   NCPUs Requested:    1                      NCPUs Used: 1               
+                                           CPU Time Used: 00:00:43        
+   Memory Requested:   190.0GB               Memory Used: 1.77GB          
+   Walltime requested: 02:00:00            Walltime Used: 00:00:59        
+   JobFS requested:    100.0MB                JobFS used: 1.11GB          
+======================================================================================

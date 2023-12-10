@@ -18,16 +18,16 @@
   - [Description](#description)
 
 Somatic-shortV-nf is a Nextflow pipeline for identifying somatic short variant events in Illumina short read whole genome sequence data. 
-We have followed the [GATK Best practices](https://gatk.broadinstitute.org/hc/en-us/articles/360035894731-Somatic-short-variant-discovery-SNVs-Indels-) . The input to this pipeline are the per sample "g.vcf" files which are generated using [nf-core/sarek](https://nf-co.re/sarek). 
-
+We have followed the [GATK Best practices](https://gatk.broadinstitute.org/hc/en-us/articles/360035894731-Somatic-short-variant-discovery-SNVs-Indels-) .  
 
 There are three main steps in the process of calling Somatic Short Variants:
 
 (1) **Creation of Somatic short variants Panel of Normals (PoN)** : 
+:wrench: This pipeline is currently under development :wrench:
 <br>This involves converting the Normal BAMs to PON. The PON's are -
   * Made from normal samples i.e. the samples derived from healthy tissue and 
   * Their main purpose is to capture recurrent technical artifacts in order to improve the results of the variant calling analysis.
-  * Please use the github repository [SomaticShortV_makePON-nf](https://github.com/Sydney-Informatics-Hub/SomaticShortV_makePON-nf) to create the PoN.
+  * Please use the github repository [SomaticShortV_makePON-nf](https://github.com/Sydney-Informatics-Hub/Somatic-shortV-makePON-nf) to create the PoN. 
 <br>
 
 (2) **Call the somatic short variants for a Tumor-Normal pair** :
@@ -35,21 +35,21 @@ There are three main steps in the process of calling Somatic Short Variants:
   * Generate a large set of candidate somatic variants.
   * Filter the candidate somatic variants into a more confident set of somatic variant calls.
 
-- Calling candidate somatic short variants involved the use of the tool [Mutect2](https://gatk.broadinstitute.org/hc/en-us/articles/360035531132) which calls both SNVs and indels simultaneously by generating a local assembly of haplotypes in an active region, de-novo. When Mutect2 sees a region with somatic variations, it dis-regards the existing mapping information completely and re-assembles the reads in that region in order to generate candidate variant haplotypes.
+- Calling candidate somatic short variants involves the use of the tool [Mutect2](https://gatk.broadinstitute.org/hc/en-us/articles/360035531132) which calls both SNVs and indels simultaneously by generating a local assembly of haplotypes in an active region, de-novo. When Mutect2 sees a region with somatic variations, it dis-regards the existing mapping information completely and re-assembles the reads in that region in order to generate candidate variant haplotypes.
 
-* This was followed by calculating contamination using the tools [GetPileupSummaries](https://gatk.broadinstitute.org/hc/en-us/articles/9570416554907-GetPileupSummaries) and [CalculateContamination](https://gatk.broadinstitute.org/hc/en-us/articles/9570322332315-CalculateContamination)
-* The next step was to learn the parameters of a model for orientation bias using the tool [LearnReadOrientationModel](https://gatk.broadinstitute.org/hc/en-us/articles/360051305331-LearnReadOrientationModel)
+* This is followed by calculating contamination using the tools [GetPileupSummaries](https://gatk.broadinstitute.org/hc/en-us/articles/9570416554907-GetPileupSummaries) and [CalculateContamination](https://gatk.broadinstitute.org/hc/en-us/articles/9570322332315-CalculateContamination)
+* The next step is to learn the parameters of a model for orientation bias using the tool [LearnReadOrientationModel](https://gatk.broadinstitute.org/hc/en-us/articles/360051305331-LearnReadOrientationModel)
 * The [FilterMutectCalls](https://gatk.broadinstitute.org/hc/en-us/articles/360036856831-FilterMutectCalls) tool then applies filters to the raw output of Mutect2. 
 
 
 (3) **Annotating the variants**
-<br> An external genomic variant annotations and functional effect prediction tool [SnpEff](http://pcingola.github.io/SnpEff/) was used for annotating the filtered variants (such as amino-acid changes etc). Please refer to the above link for SnpEff details.
+<br> An external genomic variant annotations and functional effect prediction tool [SnpEff](http://pcingola.github.io/SnpEff/) is used for annotating the filtered variants (such as amino-acid changes etc). Please refer to the above link for SnpEff details.
 
 
   - [Diagram](#diagram)
 
 <p align="center"> 
-<img src="./images/Somatic_variant_calling.png" width="60%">
+<img src="./images/Somatic_variant_calling_SIH_modified.png" width="60%">
 </p> 
 
 
@@ -111,8 +111,10 @@ Somatic-shortV-nf/
 ├── LICENSE
 ├── README.md
 ├── config/
+├── images/
 ├── main.nf
 ├── modules/
+├── PBS_gadi_runPipeline.sh
 └── nextflow.config
 ```
 The important features are: 
@@ -141,6 +143,11 @@ nextflow run main.nf --help
 
 If for any reason your workflow fails, you are able to resume the workflow from the last successful process with `-resume`. 
 
+
+### For testing on NCI-Gadi
+Please use the PBS script `PBS_gadi_runPipeline.sh` present in the `Somatic-shortV-nf/` directory for testing the pipeline with test datasets. 
+**NOTE**: The pipeline is currently being tested without providing the PoN in the main command.
+
 ### 5. Results 
 Once the pipeline is complete, you will find all outputs for each sample in the results directory. Within each sample directory there is a subdirectory for each tool run which contains all intermediate files and results generated by each step.
 
@@ -157,6 +164,8 @@ To run this pipeline you must have Nextflow and Singularity installed on your ma
 |R            |          |
 
 ## Additional notes
+Resources
+- [Nextflow documentation](https://www.nextflow.io/docs/latest/index.html)
 
 ## Help / FAQ / Troubleshooting
 * It is essential that the reference genome you're using contains the same chromosomes, contigs, and scaffolds as the BAM files. To confirm what contigs are included in your indexed BAM file, you can use Samtools idxstats: 

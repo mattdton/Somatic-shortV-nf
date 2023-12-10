@@ -3,17 +3,16 @@
 /// To use DSL-2 will need to include this
 nextflow.enable.dsl=2
 
-container "${params.gatk4__container}"
-
 process LearnReadOrientationModel {
 
         tag "LearnReadOrientationModel $bam_id"
-        publishDir "$params.outdirB/", mode:'copy'
+        publishDir "${params.outDir}", mode:'copy'
 
         input:
-                path ('*')
-		tuple val(bam_id) , file(bam_N), file(bam_T)
-		path base_path
+                path ('*') 
+                tuple val(bam_id) , file(bam_N), file(bam_T)
+                
+		
 
         output:
                 path ("${bam_id}-T_${bam_id}-N.read-orientation-model.tar.gz")
@@ -21,14 +20,14 @@ process LearnReadOrientationModel {
 
         shell:
 
+
         '''
-        # Change this when running the complete ' mutect2' pipeline - followed by these filtering steps 
-        #ls !{base_path}/Somatic-ShortV/nextflow/make_PON_and_run_mutect2/Using_14SubIntervals_and_sarkMatching_gnomAD/results_mutect2/!{bam_id}*f1r2.*.tar.gz > !{bam_id}-T_!{bam_id}-N.unfiltered_f1r2.args
+        
+        # For LearnOrientationModel
+        ls !{bam_id}*f1r2.*.tar.gz > !{bam_id}-T_!{bam_id}-N.unfiltered_f1r2.args
+        
 
-        ls !{params.outdirA}/Mutect2/!{bam_id}*f1r2.*.tar.gz > !{bam_id}-T_!{bam_id}-N.unfiltered_f1r2.args
-
-
-        gatk LearnReadOrientationModel --java-options "-Xmx58g" \
+        gatk LearnReadOrientationModel --java-options "-Xmx10g" \
                 --input !{bam_id}-T_!{bam_id}-N.unfiltered_f1r2.args \
                 -O !{bam_id}-T_!{bam_id}-N.read-orientation-model.tar.gz
 

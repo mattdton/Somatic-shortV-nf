@@ -10,3 +10,13 @@ gatk Mutect2 \
              -XL chrM \
              -L "./modules/scatter_files/100M_primary_interval_${splitIntervalNumber}.list" \  
              -O ${bam_id}-T_${bam_id}-N.unfiltered.${splitIntervalNumber}.vcf.gz
+
+
+
+
+gatk  --java-options "-Xmx16g" \
+                CalculateContamination \
+                -I !{bam_id}-T.pileups.table \
+                -tumor-segmentation !{bam_id}-T_segments.table \
+                -matched !{bam_id}-N.pileups.table \
+                -O !{bam_id}-T_!{bam_id}-N_contamination.table

@@ -14,4 +14,6 @@ process checkInputs {
 	"""
 	cat "${params.input}" > samples.txt
 	"""
+
+	
 }

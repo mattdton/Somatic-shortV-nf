@@ -1,0 +1,2 @@
+#!/bin/bash -ue
+gatk --java-options "-Xmx8g -Xms8g"                 FilterMutectCalls                 --reference /g/data/er01/SIH-HPC-WGS/Reference/hs38DH.fasta                 -V Patient1-T_Patient1-N.unfiltered.vcf.gz                 --stats Patient1-T_Patient1-N.unfiltered.stats                 --tumor-segmentation Patient1-T_segments.table                 --contamination-table  Patient1-T_Patient1-N_contamination.table                 --ob-priors Patient1-T_Patient1-N.read-orientation-model.tar.gz                 -O Patient1-T_Patient1-N.filtered.vcf.gz

@@ -4,20 +4,17 @@
 nextflow.enable.dsl=2
 
 
-container "${params.gatk4__container}"
-
 process MergeMutectStats {
 
         tag "MergeMutectStats"
-        publishDir "$params.outdirB/", mode:'copy'
+        publishDir "${params.outDir}", mode:'copy'
 
 
         input:
-		tuple val(bam_id) , file(bam_N), file(bam_T)
                 path ('*') 
-		path base_path
-
-
+		tuple val(bam_id) , file(bam_N), file(bam_T)
+               
+                
         output:
                 path ("${bam_id}-T_${bam_id}-N.unfiltered_stats.args")
                 path ("${bam_id}-T_${bam_id}-N.unfiltered.stats")
@@ -25,22 +22,19 @@ process MergeMutectStats {
 
         shell:
 
-        '''
+        """
 
-        # Change this when running the complete ' mutect2' pipeline - followed by these filtering steps         
-        #ls !{base_path}/Somatic-ShortV/nextflow/make_PON_and_run_mutect2/Using_14SubIntervals_and_sarkMatching_gnomAD/results_mutect2/!{bam_id}*.stats   >!{bam_id}-T_!{bam_id}-N.unfiltered_stats.args
-
-        ls !{params.outdirA}/Mutect2/!{bam_id}*.stats   >!{bam_id}-T_!{bam_id}-N.unfiltered_stats.args
-
-
+        #Combine the stats files across the scattered Mutect2 run
+        
+        ls ${bam_id}*.stats   >${bam_id}-T_${bam_id}-N.unfiltered_stats.args
 
         gatk MergeMutectStats \
-                --stats !{bam_id}-T_!{bam_id}-N.unfiltered_stats.args \
-                -O !{bam_id}-T_!{bam_id}-N.unfiltered.stats
+                --stats ${bam_id}-T_${bam_id}-N.unfiltered_stats.args \
+                -O ${bam_id}-T_${bam_id}-N.unfiltered.stats
 
 
 
-        '''
+        """
 
 
         }

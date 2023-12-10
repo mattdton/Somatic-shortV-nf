@@ -2,15 +2,11 @@
 
 nextflow.enable.dsl=2
 
-container "${params.gatk4__container}"
 
 process CalculateContamination {
 
         tag "CalculateContamination $bam_id"
-        publishDir "$params.outdirB/", mode:'copy'
-
-
-
+        publishDir "${params.outDir}", mode:'copy'
 
         input:
 		tuple val(bam_id) , file(bam_N), file(bam_T)
@@ -23,6 +19,7 @@ process CalculateContamination {
 
         shell:
         '''
+        
         gatk  --java-options "-Xmx16g" \
                 CalculateContamination \
                 -I !{bam_id}-T.pileups.table \

@@ -28,4 +28,11 @@ process getFilteredVariants_and_annotate {
      		-O ${bam_id}-T_${bam_id}-N.filtered_only.vcf.gz
 
 
+	java -Xmx8g -jar !{command_path}/snpEff.jar -v \
+                -o gatk \
+                -stats !{bam_id}-T_!{bam_id}-N.filtered_only.ann.html \
+                GRCh38.86 \
+                !{bam_id}-T_!{bam_id}-N.filtered_only.vcf.gz > !{bam_id}-T_!{bam_id}-N.filtered_only.ann.vcf
+
+
 	}

@@ -1,0 +1,97 @@
+process	name	status	queue	realtime	cpus	%cpu	memory	%mem	rss	env
+checkInputs	checkInputs (1)	COMPLETED	-	77ms	1	40.9%	-	0.0%	2.9 MB	PATH=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/bin:$PATH
+
+mutect2	mutect2 (Patient1 e)	FAILED	normal	5s	1	-	20 GB	-	-	PATH=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/bin:$PATH
+
+mutect2	mutect2 (Patient1 b)	ABORTED	normal	-	1	-	20 GB	-	-	PATH=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/bin:$PATH
+
+mutect2	mutect2 (Patient1 a)	ABORTED	normal	-	1	-	20 GB	-	-	PATH=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/bin:$PATH
+
+mutect2	mutect2 (Patient1 c)	ABORTED	normal	-	1	-	20 GB	-	-	PATH=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/bin:$PATH
+
+mutect2	mutect2 (Patient1 d)	ABORTED	normal	-	1	-	20 GB	-	-	PATH=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/bin:$PATH
+
+mutect2	mutect2 (Patient1 g)	ABORTED	normal	-	1	-	20 GB	-	-	PATH=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/bin:$PATH
+
+mutect2	mutect2 (Patient1 f)	ABORTED	normal	-	1	-	20 GB	-	-	PATH=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/bin:$PATH
+
+mutect2	mutect2 (Patient1 i)	ABORTED	normal	-	1	-	20 GB	-	-	PATH=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/bin:$PATH
+
+mutect2	mutect2 (Patient1 h)	ABORTED	normal	-	1	-	20 GB	-	-	PATH=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/bin:$PATH
+
+mutect2	mutect2 (Patient1 j)	ABORTED	normal	-	1	-	20 GB	-	-	PATH=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/bin:$PATH
+
+mutect2	mutect2 (Patient1 k)	ABORTED	normal	-	1	-	20 GB	-	-	PATH=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/bin:$PATH
+
+mutect2	mutect2 (Patient1 l)	ABORTED	normal	-	1	-	20 GB	-	-	PATH=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/bin:$PATH
+
+mutect2	mutect2 (Patient1 m)	ABORTED	normal	-	1	-	20 GB	-	-	PATH=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/bin:$PATH
+
+mutect2	mutect2 (Patient1 n)	ABORTED	normal	-	1	-	20 GB	-	-	PATH=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/bin:$PATH
+
+mutect2	mutect2 (Patient2 a)	ABORTED	normal	-	1	-	20 GB	-	-	PATH=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/bin:$PATH
+
+mutect2	mutect2 (Patient1 h)	FAILED	normal	5.1s	1	-	20 GB	-	-	PATH=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/bin:$PATH
+
+mutect2	mutect2 (Patient2 b)	ABORTED	normal	-	1	-	20 GB	-	-	PATH=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/bin:$PATH
+
+mutect2	mutect2 (Patient2 c)	ABORTED	normal	-	1	-	20 GB	-	-	PATH=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/bin:$PATH
+
+mutect2	mutect2 (Patient2 d)	ABORTED	normal	-	1	-	20 GB	-	-	PATH=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/bin:$PATH
+
+mutect2	mutect2 (Patient2 f)	ABORTED	normal	-	1	-	20 GB	-	-	PATH=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/bin:$PATH
+
+mutect2	mutect2 (Patient2 e)	ABORTED	normal	-	1	-	20 GB	-	-	PATH=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/bin:$PATH
+
+mutect2	mutect2 (Patient2 g)	ABORTED	normal	-	1	-	20 GB	-	-	PATH=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/bin:$PATH
+
+mutect2	mutect2 (Patient2 h)	ABORTED	normal	-	1	-	20 GB	-	-	PATH=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/bin:$PATH
+
+mutect2	mutect2 (Patient2 i)	ABORTED	normal	-	1	-	20 GB	-	-	PATH=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/bin:$PATH
+
+mutect2	mutect2 (Patient2 j)	ABORTED	normal	-	1	-	20 GB	-	-	PATH=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/bin:$PATH
+
+mutect2	mutect2 (Patient2 l)	ABORTED	normal	-	1	-	20 GB	-	-	PATH=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/bin:$PATH
+
+mutect2	mutect2 (Patient2 k)	ABORTED	normal	-	1	-	20 GB	-	-	PATH=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/bin:$PATH
+
+mutect2	mutect2 (Patient2 m)	ABORTED	normal	-	1	-	20 GB	-	-	PATH=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/bin:$PATH
+
+mutect2	mutect2 (Patient2 n)	ABORTED	normal	-	1	-	20 GB	-	-	PATH=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/bin:$PATH
+
+mutect2	mutect2 (Patient1 l)	FAILED	normal	5.2s	1	-	20 GB	-	-	PATH=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/bin:$PATH
+
+mutect2	mutect2 (Patient2 i)	FAILED	normal	5ms	1	-	20 GB	-	-	PATH=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/bin:$PATH
+
+mutect2	mutect2 (Patient1 j)	ABORTED	normal	-	1	-	20 GB	-	-	PATH=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/bin:$PATH
+
+mutect2	mutect2 (Patient1 k)	ABORTED	normal	-	1	-	20 GB	-	-	PATH=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/bin:$PATH
+
+mutect2	mutect2 (Patient1 m)	ABORTED	normal	-	1	-	20 GB	-	-	PATH=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/bin:$PATH
+
+mutect2	mutect2 (Patient1 n)	ABORTED	normal	-	1	-	20 GB	-	-	PATH=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/bin:$PATH
+
+mutect2	mutect2 (Patient2 a)	ABORTED	normal	-	1	-	20 GB	-	-	PATH=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/bin:$PATH
+
+mutect2	mutect2 (Patient2 b)	ABORTED	normal	-	1	-	20 GB	-	-	PATH=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/bin:$PATH
+
+mutect2	mutect2 (Patient2 c)	ABORTED	normal	-	1	-	20 GB	-	-	PATH=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/bin:$PATH
+
+mutect2	mutect2 (Patient2 d)	ABORTED	normal	-	1	-	20 GB	-	-	PATH=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/bin:$PATH
+
+mutect2	mutect2 (Patient2 e)	ABORTED	normal	-	1	-	20 GB	-	-	PATH=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/bin:$PATH
+
+mutect2	mutect2 (Patient2 f)	ABORTED	normal	-	1	-	20 GB	-	-	PATH=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/bin:$PATH
+
+mutect2	mutect2 (Patient2 g)	ABORTED	normal	-	1	-	20 GB	-	-	PATH=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/bin:$PATH
+
+mutect2	mutect2 (Patient2 h)	ABORTED	normal	-	1	-	20 GB	-	-	PATH=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/bin:$PATH
+
+mutect2	mutect2 (Patient2 k)	ABORTED	normal	-	1	-	20 GB	-	-	PATH=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/bin:$PATH
+
+mutect2	mutect2 (Patient2 l)	ABORTED	normal	-	1	-	20 GB	-	-	PATH=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/bin:$PATH
+
+mutect2	mutect2 (Patient2 m)	ABORTED	normal	-	1	-	20 GB	-	-	PATH=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/bin:$PATH
+
+mutect2	mutect2 (Patient2 n)	ABORTED	normal	-	1	-	20 GB	-	-	PATH=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/bin:$PATH
+
