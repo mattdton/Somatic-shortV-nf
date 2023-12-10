@@ -23,7 +23,10 @@ We have followed the [GATK Best practices](https://gatk.broadinstitute.org/hc/en
 There are three main steps in the process of calling Somatic Short Variants:
 
 (1) **Creation of Somatic short variants Panel of Normals (PoN)** : 
-:wrench: This pipeline is currently under development :wrench:
+<p align="center">
+:wrench: This pipeline is currently under development
+</p> 
+
 <br>This involves converting the Normal BAMs to PON. The PON's are -
   * Made from normal samples i.e. the samples derived from healthy tissue and 
   * Their main purpose is to capture recurrent technical artifacts in order to improve the results of the variant calling analysis.
