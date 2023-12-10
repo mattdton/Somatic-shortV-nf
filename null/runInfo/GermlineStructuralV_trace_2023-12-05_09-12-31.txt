@@ -1,3 +1,0 @@
-process	name	status	queue	realtime	cpus	%cpu	memory	%mem	rss	env
-checkInputs	checkInputs (1)	COMPLETED	-	60ms	1	40.3%	-	0.0%	2.9 MB	PATH=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/bin:$PATH
-
