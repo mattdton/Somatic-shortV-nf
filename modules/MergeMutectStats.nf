@@ -21,6 +21,7 @@ process MergeMutectStats {
 
 
         shell:
+        // Combine the stats files across the scattered Mutect2 run
 
         """
 

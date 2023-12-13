@@ -18,6 +18,8 @@ process CalculateContamination {
                 path ("${bam_id}-T_segments.table")
 
         shell:
+        // Calculate the fraction of reads coming from cross-sample contamination
+        
         '''
         
         gatk  --java-options "-Xmx16g" \

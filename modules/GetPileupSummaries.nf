@@ -3,7 +3,7 @@
 /// To use DSL-2 will need to include this
 nextflow.enable.dsl=2
 
-//container "${params.gatk4__container}"
+
 
 process GetPileupSummaries_T {
 
@@ -25,6 +25,8 @@ process GetPileupSummaries_T {
                 path ("${bam_id}-T.pileups.table")
 
         shell:
+        // Tabulate pileup metrics for inferring contamination - Tumor samples
+
         '''
         
         gatk --java-options "-Xmx10g -XX:ParallelGCThreads=2" \
@@ -61,6 +63,8 @@ process GetPileupSummaries_N {
 
 
         shell:
+        // Tabulate pileup metrics for inferring contamination - Normal samples
+
         '''
 
         gatk --java-options "-Xmx10g -XX:ParallelGCThreads=2" \

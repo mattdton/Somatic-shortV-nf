@@ -129,9 +129,7 @@ workflow {
 	//Run the processes 
 	
   // Run mutect2 on a Tumor/Normal sample-pair
-  // For initial testing PoN is omitted 
-  //mutect2(params.ponvcf,params.ponvcf+'.tbi',bam_pair_ch,intervalList,base_path,refdir_path)
-  mutect2(bam_pair_ch,params.intervalList)
+  mutect2(bam_pair_ch,params.intervalList,params.ponvcf,params.ponvcf+'.tbi')
 
   // Gather multiple VCF files from a scatter operation into a single VCF file
 	GatherVcfs_step(mutect2.out[0].collect(),bam_pair_ch)
@@ -144,7 +142,6 @@ workflow {
   
 
   // Tabulate pileup metrics for inferring contamination - Tumor samples
-	//GetPileupSummaries_T(params.ref+'/gatk-best-practices/somatic-hg38/small_exac_common_3.hg38.vcf.gz',params.ref+'/gatk-best-practices/somatic-hg38/small_exac_common_3.hg38.vcf.gz.tbi', bam_pair_ch,LearnReadOrientationModel.out.collect())
   GetPileupSummaries_T(params.ref+'/gatk-best-practices/somatic-hg38/small_exac_common_3.hg38.vcf.gz',params.ref+'/gatk-best-practices/somatic-hg38/small_exac_common_3.hg38.vcf.gz.tbi', bam_pair_ch)
 
 

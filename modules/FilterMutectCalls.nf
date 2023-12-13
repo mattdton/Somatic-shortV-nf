@@ -3,7 +3,6 @@
 
 nextflow.enable.dsl=2
 
-//container "${params.gatk4__container}"
 
 process FilterMutectCalls {
 
@@ -27,6 +26,8 @@ process FilterMutectCalls {
                 path ("${bam_id}-T_${bam_id}-N.filtered.vcf.gz")
 
         shell:
+        // Filter somatic SNVs and indels called by Mutect2
+        
         '''
         
 

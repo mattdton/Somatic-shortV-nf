@@ -4,7 +4,7 @@
 #PBS -N Somatic-shortV
 #PBS -l walltime=02:00:00
 #PBS -l ncpus=1
-#PBS -l mem=180GB
+#PBS -l mem=60GB
 #PBS -W umask=022
 #PBS -q copyq
 #PBS -e Somatic-shortV-nf.e
@@ -37,6 +37,7 @@ samples=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/So
 whoami=npd561
 path_to_intervalList=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/modules/scatter_files
 outDir=results
+ponvcf=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/pon.vcf.gz
   
 
 
@@ -46,6 +47,7 @@ nextflow run main.nf -resume \
         -profile gadi \
         --whoami ${whoami} --gadi_account $PROJECT \
         --ref ${ref} \
+        --ponvcf ${ponvcf} \
         --intervalList_path ${path_to_intervalList} \
         --outDir ${outDir}
         

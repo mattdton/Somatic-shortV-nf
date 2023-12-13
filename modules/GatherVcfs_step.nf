@@ -3,7 +3,6 @@
 /// To use DSL-2 will need to include this
 nextflow.enable.dsl=2
 
-//container "${params.gatk4__container}"
 
 process GatherVcfs_step {
 
@@ -22,6 +21,7 @@ process GatherVcfs_step {
 
         
         script:
+        // Gather multiple VCF files from a scatter operation into a single VCF file
 
         """
         

@@ -19,7 +19,7 @@ process LearnReadOrientationModel {
 
 
         shell:
-
+        // Run the gatk LearnReadOrientationModel 
 
         '''
         
