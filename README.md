@@ -177,7 +177,6 @@ The NCI Gadi config currently runs all tasks apart from the rehead processes on 
 
 
 Please use the PBS script `PBS_gadi_runPipeline.sh` present in the main `Somatic-shortV-nf/` directory for testing the pipeline with test datasets. 
-**NOTE**: The pipeline is currently being tested without providing the   in the main command.
 
 
 ## Benchmarking
