@@ -37,7 +37,7 @@ process mutect2 {
              -normal ${bam_id}-N \
              --f1r2-tar-gz ${bam_id}-T_${bam_id}-N.f1r2.${splitIntervalNumber}.tar.gz \
              -XL chrM \
-             -L ${params.intervalList_path}/100M_primary_interval_${splitIntervalNumber}.list \
+             -L ${params.intervalList_path}/${splitIntervalNumber}-scattered.interval_list \
 	     -O ${bam_id}-T_${bam_id}-N.unfiltered.${splitIntervalNumber}.vcf.gz
 
         """

@@ -92,6 +92,7 @@ Somatic-shortV-nf/
 ├── README.md
 ├── config/
 ├── images/
+├── scripts/
 ├── main.nf
 ├── modules/
 ├── PBS_gadi_runPipeline.sh
@@ -109,7 +110,7 @@ The important features are:
 The most basic run command for this pipeline is: 
 
 ```
-nextflow run main.nf --ref reference.fasta
+nextflow run main.nf --input  sample.tsv --ref reference.fasta
 
 ```
 
@@ -167,7 +168,7 @@ Coming soon!
 ## Workflow summaries
 ### Metadata
 
-|metadata field     | GermlineStructuralV-nf / v1.0     |
+|metadata field     | Somatic-shortV-nf / v1.0     |
 |-------------------|:--------------------------------- |
 |Version            | 1.0                               |
 |Maturity           | under development                 |

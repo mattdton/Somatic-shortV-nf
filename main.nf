@@ -1,7 +1,5 @@
 #!/usr/bin/env nextflow
 
-/// To use DSL-2 will need to include this
-nextflow.enable.dsl=2
 
 // =================================================================
 // main.nf is the pipeline script for a nextflow pipeline
@@ -72,7 +70,7 @@ workDir     : ${workflow.workDir}
 
 def helpMessage() {
     log.info"""
-  Usage:  nextflow run main.nf --ref reference.fasta
+  Usage:  nextflow run main.nf --input <samples.tsv>  --ref reference.fasta
 
   Required Arguments:
     --input		  Full path and name of sample input file (tsv format).
@@ -113,9 +111,6 @@ workflow {
   // Check inputs file exists
 	checkInputs(Channel.fromPath(params.input, checkIfExists: true))
 	
-  // Original - all files are placed in a specific folder
-  //bam_pair_ch=Channel.fromFilePairs( params.bams )
-
    
 
   // Split cohort file to collect info for each sample
@@ -123,9 +118,6 @@ workflow {
 		.splitCsv(header: true, sep:"\t")
 		.map { row -> tuple(row.sampleID, file(row.bam_N), file(row.bam_T))}
 	
-
-//params.bams = "/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Fastq-to-BAM_BASEDIR/Fastq-to-BAM/Dedup_sort/*-{N,T}.coordSorted.dedup.bam"
-//bam_pair_ch=Channel.fromFilePairs( params.bams )
 
 	//Run the processes 
 	
@@ -153,10 +145,11 @@ workflow {
 	CalculateContamination(bam_pair_ch,GetPileupSummaries_T.out.collect(),GetPileupSummaries_N.out.collect())
 
   // Filter somatic SNVs and indels called by Mutect2
-	FilterMutectCalls(bam_pair_ch,MergeMutectStats.out[1].collect(),CalculateContamination.out[0].collect(),CalculateContamination.out[1].collect(),GatherVcfs_step.out[0].collect(),GatherVcfs_step.out[1].collect(),LearnReadOrientationModel.out.collect(),params.ref)	
+	FilterMutectCalls(bam_pair_ch,MergeMutectStats.out[1].collect(),CalculateContamination.out[0].collect(),CalculateContamination.out[1].collect(),GatherVcfs.out[0].collect(),GatherVcfs.out[1].collect(),LearnReadOrientationModel.out.collect(),params.ref)	
 
   // Select a subset of variants from a VCF file 
 	getFilteredVariants(bam_pair_ch,FilterMutectCalls.out.collect(),params.ref)
+
 
   // Annotate the above subsetted VCF file using snpEff (optional - To be included)
   //annotateWithSnpEff(bam_pair_ch,getFilteredVariants.out)
