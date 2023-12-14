@@ -1,7 +1,7 @@
 #!/usr/bin/env nextflow
-nextflow.enable.dsl=2
 
-process annotate_with_snpEff {
+
+process annotateWithSnpEff {
 
         tag "annotate_with_snpEff $bam_id"
         publishDir "$params.outdir/Mutect2_filtered/", mode:'copy'

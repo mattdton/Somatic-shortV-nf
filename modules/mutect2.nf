@@ -1,13 +1,5 @@
 #!/usr/bin/env nextflow
 
-// Enable DSL-2 syntax
-nextflow.enable.dsl=2
-
-// Define the process
-/// This process runs mutect2 on a tumor/normal sample-pair 
-
-
-
 process mutect2 {
 
         

@@ -9,16 +9,16 @@ nextflow.enable.dsl=2
 
 
 // Import subworkflows to be run in the workflow
-include { checkInputs                                } from './modules/check_cohort'
+include { checkInputs                                } from './modules/checkCohort'
 include { mutect2                                    } from './modules/mutect2'
-include { GatherVcfs_step                            } from './modules/GatherVcfs_step'
+include { GatherVcfs                            } from './modules/GatherVcfs'
 include { MergeMutectStats                           } from './modules/MergeMutectStats'
 include { LearnReadOrientationModel                  } from './modules/LearnReadOrientationModel'
 include { GetPileupSummaries_T; GetPileupSummaries_N } from './modules/GetPileupSummaries'
 include{  CalculateContamination                     } from './modules/CalculateContamination'
 include { FilterMutectCalls                          } from './modules/FilterMutectCalls'
 include { getFilteredVariants                        } from './modules/getFilteredVariants'
-include { annotate_with_snpEff                        } from './modules/annotate_with_snpEff'
+//include { annotateWithSnpEff                        } from './modules/annotateWithSnpEff'
    
 
 
@@ -133,7 +133,7 @@ workflow {
   mutect2(bam_pair_ch,params.intervalList,params.ponvcf,params.ponvcf+'.tbi')
 
   // Gather multiple VCF files from a scatter operation into a single VCF file
-	GatherVcfs_step(mutect2.out[0].collect(),bam_pair_ch)
+	GatherVcfs(mutect2.out[0].collect(),bam_pair_ch)
 
   // Combine the stats files across the scattered Mutect2 run
 	MergeMutectStats(mutect2.out[1].collect(),bam_pair_ch)
@@ -159,7 +159,7 @@ workflow {
 	getFilteredVariants(bam_pair_ch,FilterMutectCalls.out.collect(),params.ref)
 
   // Annotate the above subsetted VCF file using snpEff (optional - To be included)
-  annotate_with_snpEff(bam_pair_ch,getFilteredVariants.out)
+  //annotateWithSnpEff(bam_pair_ch,getFilteredVariants.out)
 
 	}}
 

@@ -1,12 +1,10 @@
 #!/usr/bin/env nextflow
 
-/// To use DSL-2 will need to include this
-nextflow.enable.dsl=2
 
 
-process GatherVcfs_step {
+process GatherVcfs {
 
-        tag "GatherVcfs_step $bam_id"
+        tag "GatherVcfs $bam_id"
         publishDir "${params.outDir}", mode:'copy'
 
 

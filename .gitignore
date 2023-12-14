@@ -3,6 +3,7 @@
 *.o
 *.e
 
+
 # Ignore temporary files
 temp/
 
