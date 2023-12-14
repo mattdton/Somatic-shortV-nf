@@ -18,39 +18,18 @@
   - [Acknowledgements/citations/credits](#acknowledgementscitationscredits)
 
 ## Description
-Somatic-shortV-nf is a Nextflow pipeline for identifying somatic short variant events in Illumina short read whole genome sequence data. 
-We have followed the [GATK Best practices](https://gatk.broadinstitute.org/hc/en-us/articles/360035894731-Somatic-short-variant-discovery-SNVs-Indels-) .  
+Somatic-shortV-nf is a pipeline for identifying somatic short variant (SNPs and indels) events in human Illumina short read whole genome sequence data from tumour and matched normal BAM files. The pipeline follows the [GATK's Best Practices](https://gatk.broadinstitute.org/hc/en-us/articles/360035894731-Somatic-short-variant-discovery-SNVs-Indels-) workflow. 
+The pipeline is written in Nextflow and uses Singularity/Docker to run containerised tools.
 
-There are three main steps in the process of calling Somatic Short Variants:
-
-(1) **Creation of Somatic short variants Panel of Normals (PoN)** : 
-<br>This involves converting the Normal BAMs to PON.   
-The PON's are -
-  * Made from normal samples i.e. the samples derived from healthy tissue and 
-  * Their main purpose is to capture recurrent technical artifacts in order to improve the results of the variant calling analysis.
-  * Please use the github repository [SomaticShortV_makePON-nf](https://github.com/Sydney-Informatics-Hub/Somatic-shortV-makePON-nf) to create the PoN. 
-<br>
-
-(2) **Call the somatic short variants for a Tumor-Normal pair** :
-<br>The two main steps involved in calling  Somatic Short Variants are - 
-  * Generate a large set of candidate somatic variants.
-  * Filter the candidate somatic variants into a more confident set of somatic variant calls.
-
-- Calling candidate somatic short variants involves the use of the tool [Mutect2](https://gatk.broadinstitute.org/hc/en-us/articles/360035531132) which calls both SNVs and indels simultaneously by generating a local assembly of haplotypes in an active region, de-novo. When Mutect2 sees a region with somatic variations, it dis-regards the existing mapping information completely and re-assembles the reads in that region in order to generate candidate variant haplotypes.
-
-* This is followed by calculating contamination using the tools [GetPileupSummaries](https://gatk.broadinstitute.org/hc/en-us/articles/9570416554907-GetPileupSummaries) and [CalculateContamination](https://gatk.broadinstitute.org/hc/en-us/articles/9570322332315-CalculateContamination)
-* The next step is to learn the parameters of a model for orientation bias using the tool [LearnReadOrientationModel](https://gatk.broadinstitute.org/hc/en-us/articles/360051305331-LearnReadOrientationModel)
-* The [FilterMutectCalls](https://gatk.broadinstitute.org/hc/en-us/articles/360036856831-FilterMutectCalls) tool then applies filters to the raw output of Mutect2. 
-
-
-(3) **Annotating the variants** 
-<br> An external genomic variant annotations and functional effect prediction tool [SnpEff](http://pcingola.github.io/SnpEff/) is used for annotating the filtered variants (such as amino-acid changes etc). Please refer to the above link for SnpEff details.
-
+There are two main steps to this workflow 
+- First step is to generate a large set of candidate somatic variants using the tool  [Mutect2](https://gatk.broadinstitute.org/hc/en-us/articles/360035531132). 
+- The next step is to filter the candidate variants to obtain a more confident set of somatic variant calls. 
+- The third (optional) step is to annotate the variants with gene level information using an external genomic variant annotations and functional effect prediction tool called [SnpEff](http://pcingola.github.io/SnpEff/).
 
 ## Diagram
 
 <p align="center"> 
-<img src="./images/Somatic_variant_calling_SIH_modified.png" width="60%">
+<img src="./images/Somatic_variant_calling.png" width="60%">
 </p> 
 
 
@@ -150,9 +129,10 @@ Once the pipeline is complete, you will find all outputs for each sample in the 
 
 ## Infrastructure usage and recommendations
 
-This pipeline has been successfully implemented on NCI Gadi  using infrastructure-specific configs. These configs can be used to interact with the job scheduler and assign a project code to all task job submissions for billing purposes. You can use the following flags to handle accounting:
+This pipeline has been successfully implemented on [NCI Gadi](https://nci.org.au/our-systems/hpc-systems), [Pawsey Setonix HPC](https://pawsey.org.au/systems/setonix/) and [Pawsey Nimbus cloud](https://pawsey.org.au/systems/nimbus-cloud-service/) using infrastructure-specific configs. These configs can be used to interact with the job scheduler and assign a project code to all task job submissions for billing purposes. You can use the following flags to handle accounting:
 
 * `--whoami` your NCI or Pawsey user name
+* `--setonix_account` the Setonix project account you would like to bill service units to
 * `--gadi-account` the Gadi project account you would like to bill service units to
 
 
@@ -173,7 +153,7 @@ nextflow run main.nf --input sample.tsv --ref /path/to/ref --gadi-account <accou
 
 Please be aware that as of October 2023, NCI Gadi HPC queues do not have external network access. This means you will not be able to pull the workflow code base or containers if you submit your nextflow run command as a job on any of the standard job queues. NCI currently recommends you run your Nextflow head job either in a GNU screen or tmux session from the login node or submit it as a job to the copyq.
 
-The NCI Gadi config currently runs all tasks apart from the rehead processes on the normal queue. This config uses the `--gadi-account` flag to assign a project code to all task job submissions for billing purposes. The version of Nextflow installed on Gadi has been modified to make it easier to specify resource options for jobs submitted to the cluster. See NCI's [Gadi user guide](https://opus.nci.org.au/display/DAE/Nextflow) for more details.
+The NCI Gadi config currently runs all tasks on the normal queue. This config uses the `--gadi-account` flag to assign a project code to all task job submissions for billing purposes. The version of Nextflow installed on Gadi has been modified to make it easier to specify resource options for jobs submitted to the cluster. See NCI's [Gadi user guide](https://opus.nci.org.au/display/DAE/Nextflow) for more details.
 
 
 Please use the PBS script `PBS_gadi_runPipeline.sh` present in the main `Somatic-shortV-nf/` directory for testing the pipeline with test datasets. 

@@ -18,7 +18,8 @@ include { GetPileupSummaries_T; GetPileupSummaries_N } from './modules/GetPileup
 include{  CalculateContamination                     } from './modules/CalculateContamination'
 include { FilterMutectCalls                          } from './modules/FilterMutectCalls'
 include { getFilteredVariants                        } from './modules/getFilteredVariants'
-  
+include { annotate_with_snpEff                        } from './modules/annotate_with_snpEff'
+   
 
 
 /// Print a header for your pipeline 
@@ -158,7 +159,7 @@ workflow {
 	getFilteredVariants(bam_pair_ch,FilterMutectCalls.out.collect(),params.ref)
 
   // Annotate the above subsetted VCF file using snpEff (optional - To be included)
-  //annotate_with_snpEff(bam_pair_ch,getFilteredVariants.out)
+  annotate_with_snpEff(bam_pair_ch,getFilteredVariants.out)
 
 	}}
 

@@ -17,11 +17,17 @@ process annotate_with_snpEff {
 shell:
 
 '''
-java -Xmx8g -jar snpEff.jar -v \
+# https://pcingola.github.io/SnpEff/download/
+
+#snpEff download -dataDir /scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/singularity_cache/ GRCh38.86
+
+snpEff -v \
                 -o gatk \
                 -stats !{bam_id}-T_!{bam_id}-N.filtered_only.ann.html \
                 GRCh38.86 \
+                -dataDir /scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/singularity_cache/ \
                 !{bam_id}-T_!{bam_id}-N.filtered_only.vcf.gz > !{bam_id}-T_!{bam_id}-N.filtered_only.ann.vcf
 '''
 
 }
+
