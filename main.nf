@@ -45,7 +45,7 @@ log.info """\
 
  Documentation	@ https://github.com/Sydney-Informatics-Hub/Somatic-shortV-nf
 
-Cite					@ 10.48546/workflowhub.workflow.431.1 ???
+Cite					@ TBD
 
  Log issues @ https://github.com/Sydney-Informatics-Hub/Somatic-shortV-nf/issues
 

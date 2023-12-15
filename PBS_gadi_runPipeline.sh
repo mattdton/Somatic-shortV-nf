@@ -24,7 +24,6 @@ module load singularity
 
 
 
-#export NXF_SINGULARITY_CACHEDIR=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/singularity_cache
 export NXF_SINGULARITY_CACHEDIR=/scratch/$PROJECT/$(whoami)/singularity
 
 # Fill in these variables for your run

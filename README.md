@@ -52,7 +52,7 @@ This pipeline processes paired BAM files and is capable of processing multiple s
 You will need to create a sample sheet with information about the samples you are processing, before running the pipeline. This file must be **comma-separated** and contain a header and one row per sample. Columns should correspond to sampleID, BAM-N file-path, BAM-T file-path: 
 
 ```csv
-sampleID,bam-N, bam-T 
+sampleID,bam-N,bam-T 
 SAMPLE1,/data/Bams/sample1-N.bam,/data/Bams/sample1-T.bam
 SAMPLE2,/data/Bams/sample2-N.bam,/data/Bams/sample2-T.bam|
 ``````
