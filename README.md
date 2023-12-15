@@ -49,17 +49,18 @@ To run this pipeline you will need the following inputs:
 
 This pipeline processes paired BAM files and is capable of processing multiple samples in parallel. BAM files are expected to be coordinate sorted and indexed (see [Fastq-to-BAM](https://github.com/Sydney-Informatics-Hub/Fastq-to-BAM) for an example of a best practice workflow that can generate these files).  
 
-You will need to create a sample sheet with information about the samples you are processing, before running the pipeline. This file must be **tab-separated** and contain a header and one row per sample. Columns should correspond to sampleID, BAM-N file-path, BAM-T file-path: 
+You will need to create a sample sheet with information about the samples you are processing, before running the pipeline. This file must be **comma-separated** and contain a header and one row per sample. Columns should correspond to sampleID, BAM-N file-path, BAM-T file-path: 
 
-|sampleID|bam-N                   |bam-T                       |
-|--------|----------------------|--------------------------|
-|SAMPLE1 |/data/Bams/sample1-N.bam|/data/Bams/sample1-T.bam|
-|SAMPLE2 |/data/Bams/sample2-N.bam|/data/Bams/sample2-T.bam|
+```csv
+sampleID,bam-N, bam-T 
+SAMPLE1,/data/Bams/sample1-N.bam,/data/Bams/sample1-T.bam
+SAMPLE2,/data/Bams/sample2-N.bam,/data/Bams/sample2-T.bam|
+``````
 
 When you run the pipeline, you will use the mandatory `--input` parameter to specify the location and name of the input file: 
 
 ```
---input /path/to/samples.tsv
+--input /path/to/samples.csv
 ```
 
 ### 2. Prepare the reference materials 
@@ -110,7 +111,7 @@ The important features are:
 The most basic run command for this pipeline is: 
 
 ```
-nextflow run main.nf --input  sample.tsv --ref reference.fasta
+nextflow run main.nf --input  sample.csv --ref reference.fasta
 
 ```
 
@@ -149,7 +150,7 @@ module load nextflow singularity
 To execute this workflow on NCI Gadi HPC, you will need to specify the following flags to the default run command:
 
 ```
-nextflow run main.nf --input sample.tsv --ref /path/to/ref --gadi-account <account> --whoami <username> -profile gadi
+nextflow run main.nf --input samples.csv --ref /path/to/ref --gadi-account <account> --whoami <username> -profile gadi
 ```
 
 Please be aware that as of October 2023, NCI Gadi HPC queues do not have external network access. This means you will not be able to pull the workflow code base or containers if you submit your nextflow run command as a job on any of the standard job queues. NCI currently recommends you run your Nextflow head job either in a GNU screen or tmux session from the login node or submit it as a job to the copyq.
@@ -178,7 +179,7 @@ Coming soon!
 |Workflow manager   | NextFlow                          |
 |Container          | See component tools               |
 |Install method     | NA                                |
-|GitHub             | https://https://github.com/Sydney-Informatics-Hub/Somatic-shortV-nf                            |
+|GitHub             | https://github.com/Sydney-Informatics-Hub/Somatic-shortV-nf                            |
 |bio.tools          | NA                                |
 |BioContainers      | NA                                |
 |bioconda           | NA                                | 
@@ -190,9 +191,9 @@ To run this pipeline you must have Nextflow and Singularity installed on your ma
 |Tool         | Version  |
 |-------------|:---------|
 |Nextflow     |>=20.07.1 |
-|Singularity  |          |
-|SnpEff       |     |
-|R            |          |
+|Singularity  |   3.11.3       |
+|GATK  |   4.4.0.0       |
+|SnpEff       |  5.2   |
 
 ## Additional notes
 Resources

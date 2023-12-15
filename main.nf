@@ -70,10 +70,10 @@ workDir     : ${workflow.workDir}
 
 def helpMessage() {
     log.info"""
-  Usage:  nextflow run main.nf --input <samples.tsv>  --ref reference.fasta
+  Usage:  nextflow run main.nf --input <samples.csv>  --ref reference.fasta
 
   Required Arguments:
-    --input		  Full path and name of sample input file (tsv format).
+    --input		  Full path and name of sample input file (csv format).
 	  --ref			  Full path and name of reference genome (fasta format).
 	
   Optional Arguments:
@@ -115,7 +115,7 @@ workflow {
 
   // Split cohort file to collect info for each sample
 	bam_pair_ch = checkInputs.out
-		.splitCsv(header: true, sep:"\t")
+		.splitCsv(header: true, sep:",")
 		.map { row -> tuple(row.sampleID, file(row.bam_N), file(row.bam_T))}
 	
 
