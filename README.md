@@ -200,7 +200,7 @@ Resources
 - [Nextflow documentation](https://www.nextflow.io/docs/latest/index.html)
 
 ## Help / FAQ / Troubleshooting
-* It is essential that the reference genome you're using contains the same chromosomes, contigs, and scaffolds as the BAM files. This is [mandated by Manta](https://github.com/Illumina/manta/issues/92), which will throw an error if the BAM and FASTA files do not match. To confirm what contigs are included in your indexed BAM file, you can use Samtools idxstats:
+* It is essential that the reference genome you're using contains the same chromosomes, contigs, and scaffolds as the BAM files. To confirm what contigs are included in your indexed BAM file, you can use Samtools idxstats:
 ```
 samtools idxstats input.bam | cut -f 1
 ```
