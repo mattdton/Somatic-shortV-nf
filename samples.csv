@@ -1,3 +1,0 @@
-sampleID,bam_N,bam_T
-Patient1,/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Fastq-to-BAM_BASEDIR/Fastq-to-BAM/Dedup_sort/Patient1-N.coordSorted.dedup.bam,/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Fastq-to-BAM_BASEDIR/Fastq-to-BAM/Dedup_sort/Patient1-T.coordSorted.dedup.bam
-Patient2,/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Fastq-to-BAM_BASEDIR/Fastq-to-BAM/Dedup_sort/Patient2-N.coordSorted.dedup.bam,/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Fastq-to-BAM_BASEDIR/Fastq-to-BAM/Dedup_sort/Patient2-T.coordSorted.dedup.bam

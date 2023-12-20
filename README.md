@@ -22,8 +22,8 @@ Somatic-shortV-nf is a pipeline for identifying somatic short variant (SNPs and 
 The pipeline is written in Nextflow and uses Singularity/Docker to run containerised tools.
 
 There are two main steps to this workflow 
-1. First step is to generate a large set of candidate somatic variants using the tool  [Mutect2](https://gatk.broadinstitute.org/hc/en-us/articles/360035531132). 
-2. The next step is to filter the candidate variants to obtain a more confident set of somatic variant calls. 
+1. Generate a large set of candidate somatic variants using the tool [Mutect2](https://gatk.broadinstitute.org/hc/en-us/articles/360035531132). 
+2. Filter the candidate variants to obtain a more confident set of somatic variant calls. 
 
 ## Diagram
 
@@ -40,7 +40,7 @@ To run this pipeline, you will need to prepare your input files, reference data,
 
 To run this pipeline you will need the following inputs: 
 
-* Paired Tumor-Normal paired BAM files
+* Paired Tumor-Normal (T-N) paired BAM files
 * Corresponding BAM index files  
 * Input sample sheet 
 
@@ -51,7 +51,7 @@ You will need to create a sample sheet with information about the samples you ar
 ```csv
 sampleID,bam-N,bam-T 
 SAMPLE1,/data/Bams/sample1-N.bam,/data/Bams/sample1-T.bam
-SAMPLE2,/data/Bams/sample2-N.bam,/data/Bams/sample2-T.bam|
+SAMPLE2,/data/Bams/sample2-N.bam,/data/Bams/sample2-T.bam
 ``````
 
 When you run the pipeline, you will use the mandatory `--input` parameter to specify the location and name of the input file: 
@@ -64,24 +64,39 @@ When you run the pipeline, you will use the mandatory `--input` parameter to spe
 
 To run this pipeline you will need the following reference files:
 
-- Indexed reference genome in FASTA format. You will need to download and index a copy of the reference genome you would like to use. Reference FASTA files must be accompanied by a .fai index file. If you are working with a species that has a public reference genome, you can download FASTA files from the [Ensembl](https://asia.ensembl.org/info/data/ftp/index.html), [UCSC](https://genome.ucsc.edu/goldenPath/help/ftp.html), or [NCBI](https://www.ncbi.nlm.nih.gov/genome/doc/ftpfaq/) ftp sites. 
-- You can use our [IndexReferenceFasta-nf pipeline](https://github.com/Sydney-Informatics-Hub/IndexReferenceFasta-nf) to generate indexes. This pipeline uses the following tools for generating specific index files.
+- Indexed reference genome in FASTA format. 
+  - Reference FASTA files must be accompanied by a .fai index file. 
+  - You can download FASTA files from the [Ensembl](https://asia.ensembl.org/info/data/ftp/index.html), [UCSC](https://genome.ucsc.edu/goldenPath/help/ftp.html), or [NCBI](https://www.ncbi.nlm.nih.gov/genome/doc/ftpfaq/) ftp sites. 
 
-|Tool    | Index file(s)   |
-|-------------------|:--------------------------------- |
-|samtools            | .fai                               |
-|bwa            | .amb, .ann, .bwt, .pac, .sa                               |
-|picard            | .dict                              |
+- You can use our [IndexReferenceFasta-nf pipeline](https://github.com/Sydney-Informatics-Hub/IndexReferenceFasta-nf) to generate indexes. 
+This pipeline uses the following tools for generating specific index files.
+  - [samtools](https://www.htslib.org/doc/samtools-faidx.html).fai
+  - [picard](https://gatk.broadinstitute.org/hc/en-us/articles/360037593331-CreateSequenceDictionary-Picard-).dict 
+  - [bwa](https://bio-bwa.sourceforge.net/bwa.shtml).amb, .ann, .bwt, .pac, .sa 
 
-When you run the pipeline, you will use the mandatory `--ref` parameter to specify the location and name of the reference.fasta file: 
-```
---ref /path/to/reference.fasta
-```
+
 ***Note***: You must specify the full path for the reference fasta, even if it is in your working directory.
 
-- You will also need to download 
 
-### 3. Clone this repository 
+### 3. Download files
+#### Download the sub-interval files required for Mutect2 
+  - **Step 1**: Click on the [link](https://console.cloud.google.com/storage/browser/genomics-public-data/resources/broad/hg38/v0;tab=objects?pli=1&prefix=&forceOnObjectsSortingFiltering=false&pageState=(%22StorageObjectListTable%22:(%22f%22:%22%255B%255D%22)))
+  - **Step 2**: Click on [scattered_calling_intervals] and select all checkboxes and click `Download`. 
+  - **Step 3**: To download all the files, you will need to install the utility `gsutil`. Please follow the steps as shown below in a command-line window
+    - Download, unzip and install the excecutable  
+      - curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-457.0.0-linux-x86_64.tar.gz
+      - tar -xf google-cloud-cli-457.0.0-linux-x86_64.tar.gz
+      - ./google-cloud-sdk/install.sh
+      - Close rhe current command-line window and re-open it. The utility `gsutil` will now be available in the path.
+  - **Step 4**:Go back to Step (2) and download the files as suggested.
+
+#### A Panel of Normals (PoN) for Mutect2  
+The user can create a PoN file using our [pipeline](https://github.com/Sydney-Informatics-Hub/Somatic-ShortV?tab=readme-ov-file#4-create-pon-per-genomic-interval).
+
+#### Common biallelic variant resources for GetPileupSummaries 
+The user can create the Common biallelic variant resource files using our [pipeline](https://github.com/Sydney-Informatics-Hub/Somatic-ShortV?tab=readme-ov-file#0-optional-create-common-biallelic-variant-resources)
+
+### 4. Clone this repository 
 
 Download the code contained in this repository with: 
 
@@ -116,6 +131,7 @@ The most basic run command for this pipeline is:
 nextflow run main.nf --input samples.csv --ref reference.fasta  --intervalList_path path_to_intervals --ponvcf pon.vcf.gz
         
 ```
+**Note**: Please use the command provided in the script `scripts/run_pipeline_on_gadi_script.sh` on NCI Gadi HPC.
 
 By default, this will generate `work` directory, `results` output directory and a `runInfo` run metrics directory inside the results directory. 
 
@@ -128,18 +144,6 @@ nextflow run main.nf --help
 If for any reason your workflow fails, you are able to resume the workflow from the last successful process with `-resume`. 
 
 
-### 5. Results 
-Once the pipeline is complete, you will find all outputs for each sample in the results directory. **Note** I still need to delete arrange the output files in proper sub-directory structure.
-
-## Infrastructure usage and recommendations
-
-This pipeline has been successfully implemented on [NCI Gadi](https://nci.org.au/our-systems/hpc-systems), [Pawsey Setonix HPC](https://pawsey.org.au/systems/setonix/) and [Pawsey Nimbus cloud](https://pawsey.org.au/systems/nimbus-cloud-service/) using infrastructure-specific configs. These configs can be used to interact with the job scheduler and assign a project code to all task job submissions for billing purposes. You can use the following flags to handle accounting:
-
-* `--whoami` your NCI or Pawsey user name
-* `--setonix_account` the Setonix project account you would like to bill service units to
-* `--gadi-account` the Gadi project account you would like to bill service units to
-
-
 ### NCI Gadi HPC
 
 Before running the pipeline you will need to load Nextflow and Singularity, both of which are globally installed modules on Gadi. You can do this by running the commands below:
@@ -149,19 +153,29 @@ module purge
 module load nextflow singularity
 ```
 
-To execute this workflow on NCI Gadi HPC, you will need to specify the following flags to the default run command:
+To run this workflow on NCI Gadi HPC, you can excecute the script `scripts/run_pipeline_on_gadi_script.sh` by first entering the following details in the PBS header of the script:
+- project code
+- Resource-related details  
+  - walltime
+  - ncpus
+  - mem
 
+You can then submit the script using the command:  
 ```
-nextflow run main.nf --input samples.csv --ref /path/to/ref --gadi-account <account> --whoami <username> -profile gadi
+qsub runPipeline_script.sh
 ```
+**Note**
+- The main script is excecuted using the queue `copyq` so that the singularity container images required by the pipeline are downloaded.
+- The NCI Gadi config currently runs all tasks on the normal queue. This config uses the `--gadi-account` flag to assign a project code to all task job submissions for billing purposes. The version of Nextflow installed on Gadi has been modified to make it easier to specify resource options for jobs submitted to the cluster. See NCI's [Gadi user guide](https://opus.nci.org.au/display/DAE/Nextflow) for more details.
 
-Please be aware that as of October 2023, NCI Gadi HPC queues do not have external network access. This means you will not be able to pull the workflow code base or containers if you submit your nextflow run command as a job on any of the standard job queues. NCI currently recommends you run your Nextflow head job either in a GNU screen or tmux session from the login node or submit it as a job to the copyq.
 
-The NCI Gadi config currently runs all tasks on the normal queue. This config uses the `--gadi-account` flag to assign a project code to all task job submissions for billing purposes. The version of Nextflow installed on Gadi has been modified to make it easier to specify resource options for jobs submitted to the cluster. See NCI's [Gadi user guide](https://opus.nci.org.au/display/DAE/Nextflow) for more details.
+### 5. Results 
+Once the pipeline is complete, you will find all outputs for each sample in the `results` directory. 
 
+## Infrastructure usage and recommendations
+This pipeline has been successfully implemented on [NCI Gadi](https://nci.org.au/our-systems/hpc-systems) using infrastructure-specific config. This config can be used to interact with the job scheduler and assign a project code to all task job submissions for billing purposes. You can use the following flags to handle accounting:
 
-Please use the PBS script `PBS_gadi_runPipeline.sh` present in the main `Somatic-shortV-nf/` directory for testing the pipeline with test datasets. 
-
+* `--gadi-account` the Gadi project account you would like to bill service units to
 
 ## Benchmarking
 
@@ -173,7 +187,7 @@ Coming soon!
 
 |metadata field     | Somatic-shortV-nf / v1.0     |
 |-------------------|:--------------------------------- |
-|Version            | 1.0                               |
+|Version            | 1.0.0                               |
 |Maturity           | under development                 |
 |Creators           | Tracy Chew, Cali Willet,Nandan Deshpande                    |
 |Source             | NA                                |
@@ -195,7 +209,6 @@ To run this pipeline you must have Nextflow and Singularity installed on your ma
 |Nextflow     |>=20.07.1 |
 |Singularity  |   3.11.3       |
 |GATK  |   4.4.0.0       |
-|SnpEff       |  5.2   |
 
 ## Additional notes
 Resources

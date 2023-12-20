@@ -1,6 +1,6 @@
 #!/bin/bash
   
-#PBS -P  
+#PBS -P [project code]
 #PBS -N Somatic-shortV
 #PBS -l walltime=02:00:00
 #PBS -l ncpus=1
@@ -22,22 +22,21 @@ export NXF_SINGULARITY_CACHEDIR=/scratch/$PROJECT/$(whoami)/singularity
 
 # Fill in these variables for your run
 
-samples=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/samples.csv
-ponvcf=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/Somatic-shortV-nf/pon.vcf.gz
-ref=/g/data/er01/SIH-HPC-WGS/Reference/hs38DH.fasta
-small_exac_common=/g/data/er01/SIH-HPC-WGS/Reference/gatk-best-practices/somatic-hg38/small_exac_common_3.hg38.vcf.gz
-
-intervalList_path=/g/data/er01/SIH-HPC-WGS/Reference/BQSR_apply_intervals_13
+samples=[FULL_PATH]/samples.csv
+ponvcf=[FULL_PATH]/pon.vcf.gz
+ref=[FULL_PATH]/hs38DH.fasta
+small_exac_common=[FULL_PATH]/small_exac_common_3.hg38.vcf.gz
+intervalList_path=[FULL_PATH]/Intervals_13/
 
 outDir=results
-whoami=npd561  
 
 
-# Run the pipeline (remove annotsv if not needed)
+
+# Run the pipeline 
 nextflow run main.nf -resume \
         --input ${samples} \
         -profile gadi \
-        --whoami ${whoami} --gadi_account $PROJECT \
+        --whoami $(whoami) --gadi_account $PROJECT \
         --ref ${ref} --small_exac_common ${small_exac_common}\
         --intervalList_path ${intervalList_path} \
         --ponvcf ${ponvcf} \
