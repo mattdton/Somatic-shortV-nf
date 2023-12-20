@@ -22,18 +22,15 @@ Somatic-shortV-nf is a pipeline for identifying somatic short variant (SNPs and 
 The pipeline is written in Nextflow and uses Singularity/Docker to run containerised tools.
 
 There are two main steps to this workflow 
-- First step is to generate a large set of candidate somatic variants using the tool  [Mutect2](https://gatk.broadinstitute.org/hc/en-us/articles/360035531132). 
-- The next step is to filter the candidate variants to obtain a more confident set of somatic variant calls. 
-- The third (optional) step is to annotate the variants with gene level information using an external genomic variant annotations and functional effect prediction tool called [SnpEff](http://pcingola.github.io/SnpEff/).
+1. First step is to generate a large set of candidate somatic variants using the tool  [Mutect2](https://gatk.broadinstitute.org/hc/en-us/articles/360035531132). 
+2. The next step is to filter the candidate variants to obtain a more confident set of somatic variant calls. 
 
 ## Diagram
 
 <p align="center"> 
-<img src="./images/Somatic_variant_calling.png" width="60%">
+<img src="./images/Somatic_variant_calling.png" width="100%">
 </p> 
 
-
-## Workflow description 
 
 ## User guide 
 
@@ -67,16 +64,22 @@ When you run the pipeline, you will use the mandatory `--input` parameter to spe
 
 To run this pipeline you will need the following reference files:
 
-* Indexed reference genome in FASTA format 
+- Indexed reference genome in FASTA format. You will need to download and index a copy of the reference genome you would like to use. Reference FASTA files must be accompanied by a .fai index file. If you are working with a species that has a public reference genome, you can download FASTA files from the [Ensembl](https://asia.ensembl.org/info/data/ftp/index.html), [UCSC](https://genome.ucsc.edu/goldenPath/help/ftp.html), or [NCBI](https://www.ncbi.nlm.nih.gov/genome/doc/ftpfaq/) ftp sites. 
+- You can use our [IndexReferenceFasta-nf pipeline](https://github.com/Sydney-Informatics-Hub/IndexReferenceFasta-nf) to generate indexes. This pipeline uses the following tools for generating specific index files.
 
-You will need to download and index a copy of the reference genome you would like to use. Reference FASTA files must be accompanied by a .fai index file. If you are working with a species that has a public reference genome, you can download FASTA files from the [Ensembl](https://asia.ensembl.org/info/data/ftp/index.html), [UCSC](https://genome.ucsc.edu/goldenPath/help/ftp.html), or [NCBI](https://www.ncbi.nlm.nih.gov/genome/doc/ftpfaq/) ftp sites. You can use our [IndexReferenceFasta-nf pipeline](https://github.com/Sydney-Informatics-Hub/IndexReferenceFasta-nf) to generate indexes. 
+|Tool    | Index file(s)   |
+|-------------------|:--------------------------------- |
+|samtools            | .fai                               |
+|bwa            | .amb, .ann, .bwt, .pac, .sa                               |
+|picard            | .dict                              |
 
 When you run the pipeline, you will use the mandatory `--ref` parameter to specify the location and name of the reference.fasta file: 
-
 ```
 --ref /path/to/reference.fasta
 ```
+***Note***: You must specify the full path for the reference fasta, even if it is in your working directory.
 
+- You will also need to download 
 
 ### 3. Clone this repository 
 
@@ -96,7 +99,6 @@ Somatic-shortV-nf/
 ├── scripts/
 ├── main.nf
 ├── modules/
-├── PBS_gadi_runPipeline.sh
 └── nextflow.config
 ```
 The important features are: 
@@ -111,11 +113,11 @@ The important features are:
 The most basic run command for this pipeline is: 
 
 ```
-nextflow run main.nf --input  sample.csv --ref reference.fasta
-
+nextflow run main.nf --input samples.csv --ref reference.fasta  --intervalList_path path_to_intervals --ponvcf pon.vcf.gz
+        
 ```
 
-By default, this will generate `work` directory, `results` output directory and a `runInfo` run metrics directory in the same location you ran the pipeline from. 
+By default, this will generate `work` directory, `results` output directory and a `runInfo` run metrics directory inside the results directory. 
 
 To specify additional optional tool-specific parameters, see what flags are supported by running:
 

@@ -1,7 +1,5 @@
 #!/usr/bin/env nextflow
 
-
-
 process getFilteredVariants {
 
         tag "getFilteredVariants $bam_id"
@@ -12,26 +10,20 @@ process getFilteredVariants {
                 path pair_filtered_vcfs_allvariants
                 path(ref)
                 
-
-
         output:
                 path ("${bam_id}-T_${bam_id}-N.filtered_only.vcf.gz")
-
 
         shell:
         // Select a subset of variants from a VCF file 
 
-        '''
-        
+        '''        
         gatk IndexFeatureFile \
                 --input !{bam_id}-T_!{bam_id}-N.filtered.vcf.gz
 
         gatk SelectVariants \
-                -R !{params.ref}/hs38DH.fasta \
+                -R !{params.ref} \
                 -V !{bam_id}-T_!{bam_id}-N.filtered.vcf.gz \
                 --exclude-filtered true \
                 -O !{bam_id}-T_!{bam_id}-N.filtered_only.vcf.gz
-
         '''
-
         }

@@ -1,22 +1,15 @@
 #!/usr/bin/env nextflow
 
-
-// =================================================================
-// main.nf is the pipeline script for a nextflow pipeline
-// ===================================================================
-
-
 // Import subworkflows to be run in the workflow
 include { checkInputs                                } from './modules/checkCohort'
 include { mutect2                                    } from './modules/mutect2'
-include { GatherVcfs                            } from './modules/GatherVcfs'
+include { GatherVcfs                                 } from './modules/GatherVcfs'
 include { MergeMutectStats                           } from './modules/MergeMutectStats'
 include { LearnReadOrientationModel                  } from './modules/LearnReadOrientationModel'
 include { GetPileupSummaries_T; GetPileupSummaries_N } from './modules/GetPileupSummaries'
 include{  CalculateContamination                     } from './modules/CalculateContamination'
 include { FilterMutectCalls                          } from './modules/FilterMutectCalls'
 include { getFilteredVariants                        } from './modules/getFilteredVariants'
-//include { annotateWithSnpEff                        } from './modules/annotateWithSnpEff'
    
 
 
@@ -24,40 +17,33 @@ include { getFilteredVariants                        } from './modules/getFilter
 
 log.info """\
 
-      ============================
-      ============================
-          SOMATIC SHORT V - NF 
-      ============================
-      ============================
+===================================================================
+===================================================================
+SOMATIC SHORT V - NF 
+===================================================================
+===================================================================
 
- -._    _.--'"`'--._    _.--'"`'--._    _.--'"`'--._    _  
-    '-:`.'|`|"':-.  '-:`.'|`|"':-.  '-:`.'|`|"':-.  '.` :    
-  '.  '.  | |  | |'.  '.  | |  | |'.  '.  | |  | |'.  '.:    
-  : '.  '.| |  | |  '.  '.| |  | |  '.  '.| |  | |  '.  '.  
-  '   '.  `.:_ | :_.' '.  `.:_ | :_.' '.  `.:_ | :_.' '.  `.  
-         `-..,..-'       `-..,..-'       `-..,..-'       `       
+Created by the Sydney Informatics Hub, University of Sydney
 
+Documentation	@ https://github.com/Sydney-Informatics-Hub/Somatic-shortV-nf
 
-             ~~~~ Version: 1.0 ~~~~
- 
+Cite					@ https://doi.org/10.48546/workflowhub.workflow.691.1
 
- Created by the Sydney Informatics Hub, University of Sydney
+Log issues    @ https://github.com/Sydney-Informatics-Hub/Somatic-shortV-nf/issues
 
- Documentation	@ https://github.com/Sydney-Informatics-Hub/Somatic-shortV-nf
+All the default parameters are set in `nextflow.config`
 
-Cite					@ TBD
-
- Log issues @ https://github.com/Sydney-Informatics-Hub/Somatic-shortV-nf/issues
-
- All the default parameters are set in `nextflow.config`
-
- =======================================================================================
+=======================================================================================
 Workflow run parameters 
 =======================================================================================
-
-input       : ${params.input}
-outDir      : ${params.outDir}
-workDir     : ${workflow.workDir}
+version           : ${params.version}
+input             : ${params.input}
+reference         : ${params.ref}
+small_exac_common : ${params.small_exac_common}
+ponvcf            : ${params.ponvcf}
+intervalList_path : ${params.intervalList_path}
+outDir            : ${params.outDir}
+workDir           : ${workflow.workDir}
 
 =======================================================================================
 
@@ -70,23 +56,20 @@ workDir     : ${workflow.workDir}
 
 def helpMessage() {
     log.info"""
-  Usage:  nextflow run main.nf --input <samples.csv>  --ref reference.fasta
+  Usage:   nextflow run main.nf --input samples.csv --ref reference.fasta  --intervalList_path path_to_intervals --ponvcf pon.vcf.gz
 
   Required Arguments:
-    --input		  Full path and name of sample input file (csv format).
-	  --ref			  Full path and name of reference genome (fasta format).
+    --input		                      Full path and name of sample input file (csv format).
+	  --ref			                      Full path and name of reference genome (fasta format).
+    --intervalList_path             Full path to the folder containing the interval lists required for Mutect2 step
+    --ponvcf                        Full path and name of the Panel of Normals (ponvcf) file
 	
   Optional Arguments:
-    --outDir    Specify name of results directory. 
+    --outDir                        Specify name of results directory. 
 
-
- HPC accounting arguments:
-
-        --whoami                    HPC user name (Setonix or Gadi HPC)
-        --gadi_account              Project accounting code for NCI Gadi (e.g. aa00)
-        --setonix_account           Project accounting code for Pawsey Setonix (e.g. name1234)
-
-
+  HPC accounting arguments:
+    --whoami                    HPC user name (Setonix or Gadi HPC)
+    --gadi_account              Project accounting code for NCI Gadi (e.g. aa00)
   """.stripIndent()
 }
 
@@ -97,22 +80,19 @@ workflow {
 // Show help message if --help is run or if any required params are not 
 // provided at runtime
 
-        if ( params.help || params.input == false )
+  if ( params.help == true || params.ref == false || params.input == false || params.ponvcf == false || params.small_exac_common == '' || params.intervalList_path == '')
 	{   
         // Invoke the help function above and exit
-              helpMessage()
-              exit 1
+        helpMessage()
+        exit 1
 	} 
 
 	else 
 	{
 	
-  // Define input bam-pair channel
   // Check inputs file exists
 	checkInputs(Channel.fromPath(params.input, checkIfExists: true))
 	
-   
-
   // Split cohort file to collect info for each sample
 	bam_pair_ch = checkInputs.out
 		.splitCsv(header: true, sep:",")
@@ -133,13 +113,11 @@ workflow {
   // Run the gatk LearnReadOrientationModel 
 	LearnReadOrientationModel(mutect2.out[2].collect(),bam_pair_ch)
   
-
   // Tabulate pileup metrics for inferring contamination - Tumor samples
-  GetPileupSummaries_T(params.ref+'/gatk-best-practices/somatic-hg38/small_exac_common_3.hg38.vcf.gz',params.ref+'/gatk-best-practices/somatic-hg38/small_exac_common_3.hg38.vcf.gz.tbi', bam_pair_ch)
-
+  GetPileupSummaries_T(params.small_exac_common,params.small_exac_common+'.tbi', bam_pair_ch)
 
   // Tabulate pileup metrics for inferring contamination - Normal samples
-  GetPileupSummaries_N(params.ref+'/gatk-best-practices/somatic-hg38/small_exac_common_3.hg38.vcf.gz',params.ref+'/gatk-best-practices/somatic-hg38/small_exac_common_3.hg38.vcf.gz.tbi', bam_pair_ch)
+  GetPileupSummaries_N(params.small_exac_common,params.small_exac_common+'.tbi', bam_pair_ch)
   
   // Calculate the fraction of reads coming from cross-sample contamination
 	CalculateContamination(bam_pair_ch,GetPileupSummaries_T.out.collect(),GetPileupSummaries_N.out.collect())
@@ -147,12 +125,9 @@ workflow {
   // Filter somatic SNVs and indels called by Mutect2
 	FilterMutectCalls(bam_pair_ch,MergeMutectStats.out[1].collect(),CalculateContamination.out[0].collect(),CalculateContamination.out[1].collect(),GatherVcfs.out[0].collect(),GatherVcfs.out[1].collect(),LearnReadOrientationModel.out.collect(),params.ref)	
 
-  // Select a subset of variants from a VCF file 
+  // Select the subset of filtered variants from the VCF file 
 	getFilteredVariants(bam_pair_ch,FilterMutectCalls.out.collect(),params.ref)
 
-
-  // Annotate the above subsetted VCF file using snpEff (optional - To be included)
-  //annotateWithSnpEff(bam_pair_ch,getFilteredVariants.out)
 
 	}}
 

@@ -1,7 +1,5 @@
 #!/usr/bin/env nextflow
 
-
-
 process CalculateContamination {
 
         tag "CalculateContamination $bam_id"
@@ -17,10 +15,9 @@ process CalculateContamination {
                 path ("${bam_id}-T_segments.table"), emit: tumor_T_segments_table
 
         shell:
-        // Calculate the fraction of reads coming from cross-sample contamination
+        // Calculate the fraction of reads coming from cross-sample contamination        
         
         '''
-        
         gatk  --java-options "-Xmx16g" \
                 CalculateContamination \
                 -I !{bam_id}-T.pileups.table \
@@ -28,7 +25,6 @@ process CalculateContamination {
                 -matched !{bam_id}-N.pileups.table \
                 -O !{bam_id}-T_!{bam_id}-N_contamination.table
         '''
-
         }
 
 
