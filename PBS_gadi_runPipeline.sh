@@ -1,18 +1,19 @@
 #!/bin/bash
   
-#PBS -P er01 
+#PBS -P  
 #PBS -N Somatic-shortV
 #PBS -l walltime=02:00:00
 #PBS -l ncpus=1
-#PBS -l mem=60GB
+#PBS -l mem=20GB
 #PBS -W umask=022
 #PBS -q copyq
 #PBS -e Somatic-shortV-nf.e
 #PBS -o Somatic-shortV-nf.o
 #PBS -l wd
-#PBS -l storage=scratch/er01+gdata/er01
+#PBS -l storage=scratch/[project code]+gdata/[project code]
 #PBS -l jobfs=10GB
 
+# Load singularity and nextflow modules
 module load nextflow/22.04.3
 module load singularity
 
