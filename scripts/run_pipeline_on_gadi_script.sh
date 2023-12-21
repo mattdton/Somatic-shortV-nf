@@ -25,7 +25,7 @@ ponvcf=
 ref=
 small_exac_common=
 intervalList_path=
-outDir=results
+outDir=
 
 # Run the pipeline 
 nextflow run main.nf -resume \
