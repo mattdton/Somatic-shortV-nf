@@ -18,8 +18,7 @@
   - [Acknowledgements/citations/credits](#acknowledgementscitationscredits)
 
 ## Description
-Somatic-shortV-nf is a pipeline for identifying somatic short variant (SNPs and indels) events in human Illumina short read whole genome sequence data from tumour and matched normal BAM files. The pipeline follows the [GATK's Best Practices](https://gatk.broadinstitute.org/hc/en-us/articles/360035894731-Somatic-short-variant-discovery-SNVs-Indels-) workflow. 
-The pipeline is written in Nextflow and uses Singularity/Docker to run containerised tools.
+Somatic-shortV-nf is a pipeline for identifying somatic short variant (SNPs and indels) events in human Illumina short read whole genome sequence data from tumour and matched normal BAM files. The pipeline follows the [GATK's Best Practices](https://gatk.broadinstitute.org/hc/en-us/articles/360035894731-Somatic-short-variant-discovery-SNVs-Indels-) workflow. The pipeline is written in Nextflow and uses Singularity to run containerised tools.
 
 There are two main steps to this workflow 
 1. Generate a large set of candidate somatic variants using the tool [Mutect2](https://gatk.broadinstitute.org/hc/en-us/articles/360035531132). 
