@@ -3,7 +3,6 @@
 *.o
 *.e
 
-
 # Ignore temporary files
 temp/
 
@@ -13,13 +12,8 @@ config.txt
 # Ignore the  work folder
 work
 
-
 # Ignore the  results folder
 results
 
-
 # Input samples csv file
 samples.csv
-
-
-
