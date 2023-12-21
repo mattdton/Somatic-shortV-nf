@@ -28,7 +28,7 @@ intervalList_path=
 outDir=
 
 # Run the pipeline 
-nextflow run main.nf -resume \
+nextflow run main.nf \
         --input ${samples} \
         -profile gadi \
         --whoami $(whoami) --gadi_account $PROJECT \
