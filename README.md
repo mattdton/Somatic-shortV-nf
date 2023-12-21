@@ -1,7 +1,7 @@
 # Somatic-shortV-nf
 
 <p align="center">
-:wrench: This pipeline is currently under development :wrench:
+:wrench: This pipeline is currently under development and is not currently functional :wrench:
 </p> 
 
   - [Description](#description)
