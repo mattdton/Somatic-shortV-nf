@@ -38,7 +38,7 @@ To run this pipeline, you will need to prepare your input files, reference data,
 
 To run this pipeline you will need the following inputs: 
 
-* Paired Tumor-Normal (T-N) paired BAM files
+* Paired Tumor-Normal (T-N) BAM files
 * Corresponding BAM index files  
 * Input sample sheet 
 
