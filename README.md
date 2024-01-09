@@ -77,7 +77,7 @@ This pipeline uses the following tools for generating specific index files.
 You must specify the full path for the reference fasta, even if it is in your working directory.
 
 
-### 3. Download or create required files
+### 3. Required files
 
 #### **Create genomic-interval list files required for Mutect2**
 Interval lists define subsets of genomic regions in the genome. It is advisable to split the genome into genomic-intervals to parallelize execution and/or exclude regions that have bad or uninformative data. Please refer to this [link](https://gatk.broadinstitute.org/hc/en-us/articles/360035531852-Intervals-and-interval-lists) for more details. 
@@ -94,10 +94,10 @@ Alternatively, based on the computing resources available on the your operating 
   - You do not need to provide the [picard](https://gatk.broadinstitute.org/hc/en-us/articles/360037593331-CreateSequenceDictionary-Picard-).dict file for this option.
 
 
-#### Download a Panel of Normals (PoN) for Mutect2  
+#### Create a Panel of Normals (PoN) for Mutect2  
 The user can create a PoN file using our [pipeline](https://github.com/Sydney-Informatics-Hub/Somatic-ShortV?tab=readme-ov-file#4-create-pon-per-genomic-interval).
 
-#### Common biallelic variant resources for GetPileupSummaries 
+#### Create common biallelic variant resources for GetPileupSummaries 
 The user can create the Common biallelic variant resource files using our [pipeline](https://github.com/Sydney-Informatics-Hub/Somatic-ShortV?tab=readme-ov-file#0-optional-create-common-biallelic-variant-resources)
 
 
