@@ -42,7 +42,6 @@ input             : ${params.input}
 reference         : ${params.ref}
 small_exac_common : ${params.small_exac_common}
 ponvcf            : ${params.ponvcf}
-intervalList_path : ${params.intervalList_path}
 outDir            : ${params.outDir}
 workDir           : ${workflow.workDir}
 
@@ -82,7 +81,7 @@ workflow {
 // Show help message if --help is run or if any required params are not 
 // provided at runtime
 
-  if ( params.help == true || params.ref == false || params.input == false || params.ponvcf == false || params.small_exac_common == '' || (params.number_of_intervals == 0 && params.dict == false))
+  if ( params.help == true || params.ref == false || params.input == false || params.ponvcf == false || params.small_exac_common == '')
 	{   
 
           // Invoke the help function above and exit
@@ -104,44 +103,41 @@ workflow {
 		.map { row -> tuple(row.sampleID, file(row.bam_N), file(row.bam_T))}
 	
 
-	//Run the processes 
-
+//Run the processes 
 
 // Create an intervalList based on user specified number_of_intervals
- createIntervalLists(params.number_of_intervals)
+createIntervalLists(params.number_of_intervals)
+intervalList=createIntervalLists.out[2].tokenize(" ") 
 
-
- intervalList=createIntervalLists.out[2].tokenize(" ") 
 // Run mutect2 on a Tumor/Normal sample-pair
- mutect2(bam_pair_ch,intervalList,params.ponvcf,params.ponvcf+'.tbi',createIntervalLists.out[0])
+mutect2(bam_pair_ch,intervalList,params.ponvcf,params.ponvcf+'.tbi',createIntervalLists.out[0])
 
 
-  // Gather multiple VCF files from a scatter operation into a single VCF file
-	GatherVcfs(mutect2.out[0].collect(),bam_pair_ch)
+// Gather multiple VCF files from a scatter operation into a single VCF file
+GatherVcfs(mutect2.out[0].collect(),bam_pair_ch)
 
-  // Combine the stats files across the scattered Mutect2 run
-	MergeMutectStats(mutect2.out[1].collect(),bam_pair_ch)
+// Combine the stats files across the scattered Mutect2 run
+MergeMutectStats(mutect2.out[1].collect(),bam_pair_ch)
 
-  // Run the gatk LearnReadOrientationModel 
-	LearnReadOrientationModel(mutect2.out[2].collect(),bam_pair_ch)
+// Run the gatk LearnReadOrientationModel 
+LearnReadOrientationModel(mutect2.out[2].collect(),bam_pair_ch)
   
-  // Tabulate pileup metrics for inferring contamination - Tumor samples
-  GetPileupSummaries_T(params.small_exac_common,params.small_exac_common+'.tbi', bam_pair_ch)
+// Tabulate pileup metrics for inferring contamination - Tumor samples
+GetPileupSummaries_T(params.small_exac_common,params.small_exac_common+'.tbi', bam_pair_ch)
 
-  // Tabulate pileup metrics for inferring contamination - Normal samples
-  GetPileupSummaries_N(params.small_exac_common,params.small_exac_common+'.tbi', bam_pair_ch)
+// Tabulate pileup metrics for inferring contamination - Normal samples
+GetPileupSummaries_N(params.small_exac_common,params.small_exac_common+'.tbi', bam_pair_ch)
   
-  // Calculate the fraction of reads coming from cross-sample contamination
-	CalculateContamination(bam_pair_ch,GetPileupSummaries_T.out.collect(),GetPileupSummaries_N.out.collect())
+// Calculate the fraction of reads coming from cross-sample contamination
+CalculateContamination(bam_pair_ch,GetPileupSummaries_T.out.collect(),GetPileupSummaries_N.out.collect())
 
-  // Filter somatic SNVs and indels called by Mutect2
-	FilterMutectCalls(bam_pair_ch,MergeMutectStats.out[1].collect(),CalculateContamination.out[0].collect(),CalculateContamination.out[1].collect(),GatherVcfs.out[0].collect(),GatherVcfs.out[1].collect(),LearnReadOrientationModel.out.collect(),params.ref)	
+// Filter somatic SNVs and indels called by Mutect2
+FilterMutectCalls(bam_pair_ch,MergeMutectStats.out[1].collect(),CalculateContamination.out[0].collect(),CalculateContamination.out[1].collect(),GatherVcfs.out[0].collect(),GatherVcfs.out[1].collect(),LearnReadOrientationModel.out.collect(),params.ref)	
 
-  // Select the subset of filtered variants from the VCF file 
-	getFilteredVariants(bam_pair_ch,FilterMutectCalls.out.collect(),params.ref)
+// Select the subset of filtered variants from the VCF file 
+getFilteredVariants(bam_pair_ch,FilterMutectCalls.out.collect(),params.ref)
 
-
-	}}
+}}
 
 workflow.onComplete {
   summary = """

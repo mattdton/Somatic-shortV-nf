@@ -24,10 +24,9 @@ process mutect2 {
         
         script:
         // Run mutect2 on a Tumor/Normal sample-pair
-
+        
         """
         
-
         echo "The values: $bam_id $bam_N $bam_T"
 
         gatk Mutect2 --java-options '-DGATK_STACKTRACE_ON_USER_EXCEPTION=true' \
@@ -41,12 +40,7 @@ process mutect2 {
              -L ${interval_path}/${splitIntervalNumber}-scattered.interval_list \
 	     -O ${bam_id}-T_${bam_id}-N.unfiltered.${splitIntervalNumber}.vcf.gz
 
-        #-XL !{params.exclude_intervals} \
-
         """
-
-
-
 
 }
 

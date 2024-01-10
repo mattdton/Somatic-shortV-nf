@@ -28,15 +28,12 @@ if [ "$number_of_intervals" -ne 0 ]; then
         printf "%04d\n" "$i" >> intervals_list.txt
     done
 
-
     # Read the content of intervals_list.txt into a Bash array named intervalList
     IFS=$'\n'
     #intervalList=()
     while read line; do
         intervalList+=("$line")
     done < "intervals_list.txt"
-
-
 
     # Access elements using indexing
     echo "First element: ${intervalList[0]}"
@@ -46,7 +43,6 @@ if [ "$number_of_intervals" -ne 0 ]; then
          -R !{params.ref} \
             -scatter-count $number_of_intervals \
          -O intervals_folder
-
 
 else
     # Determine number of intervals based on genome size
@@ -55,12 +51,9 @@ else
 
     number_of_intervals=$(expr $size / $min)
 
-
-
     for ((i = 0; i <= (number_of_intervals-1); i++)); do
         printf "%04d\n" "$i" >> intervals_list.txt
     done
-
 
     # Read the content of intervals_list.txt into a Bash array named intervalList
     IFS=$'\n'
@@ -68,8 +61,6 @@ else
     while read line; do
         intervalList+=("$line")
     done < "intervals_list.txt"
-
-
 
     # Access elements using indexing
     echo "First element: ${intervalList[0]}"
@@ -80,16 +71,7 @@ else
             -scatter-count $number_of_intervals \
          -O intervals_folder
 
-
-
 fi
-
-
-
-
-#-XL !{params.exclude_intervals} \
-
-
 
 '''
 

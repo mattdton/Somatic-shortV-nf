@@ -72,33 +72,34 @@ This pipeline uses the following tools for generating specific index files.
   - [picard](https://gatk.broadinstitute.org/hc/en-us/articles/360037593331-CreateSequenceDictionary-Picard-).dict 
   - [bwa](https://bio-bwa.sourceforge.net/bwa.shtml).amb, .ann, .bwt, .pac, .sa 
 
-
-***Note***:  
-You must specify the full path for the reference fasta, even if it is in your working directory.
-
-
 ### 3. Required files
 
 #### **Create genomic-interval list files required for Mutect2**
 Interval lists define subsets of genomic regions in the genome. It is advisable to split the genome into genomic-intervals to parallelize execution and/or exclude regions that have bad or uninformative data. Please refer to this [link](https://gatk.broadinstitute.org/hc/en-us/articles/360035531852-Intervals-and-interval-lists) for more details. 
 
 Documented below are the two different methods by which you can generate the interval files for Mutect2 when you run the pipeline using the nextflow command.  
-**(a) Generate optimised number of intervals based on your genome size**
-  - Provide the [picard](https://gatk.broadinstitute.org/hc/en-us/articles/360037593331-CreateSequenceDictionary-Picard-).dict file in addition to the Reference FASTA file in the command.
-  - Please **do not** provide the `--number_of_intervals` value in the command.
-  - This generates minimum 100 Mb sized intervals e.g.  32 genomic-interval files for the Human genome hg38.
 
-**(b) Generate a specific number of intervals**  
+**Generate optimised number of intervals based on your genome size**  
+Required files are:
+- Reference.fasta
+- Reference.dict
+
+**Generate a specific number of intervals**  
+You can define a specific number genomic-intervals based on the number of cpus available to parallelize execution
 Alternatively, based on the computing resources available on the your operating system, you might want to generate a specific number of genomic-intervals.
   - Please provide an integer value `--number_of_intervals` in the command. 
-  - You do not need to provide the [picard](https://gatk.broadinstitute.org/hc/en-us/articles/360037593331-CreateSequenceDictionary-Picard-).dict file for this option.
-
 
 #### Create a Panel of Normals (PoN) for Mutect2  
-The user can create a PoN file using our [pipeline](https://github.com/Sydney-Informatics-Hub/Somatic-ShortV?tab=readme-ov-file#4-create-pon-per-genomic-interval).
+- The user can create a a panel of normals (PoN) containing germline and artifactual sites for use with Mutect2 using the instructions provided [here](https://gatk.broadinstitute.org/hc/en-us/articles/360037058172-CreateSomaticPanelOfNormals-BETA-).
+- We will include this functionality as an optional module in the next version of the pipeline.
+
 
 #### Create common biallelic variant resources for GetPileupSummaries 
-The user can create the Common biallelic variant resource files using our [pipeline](https://github.com/Sydney-Informatics-Hub/Somatic-ShortV?tab=readme-ov-file#0-optional-create-common-biallelic-variant-resources)
+- A bash script `gatk4_selectvariants.pbs` is provided in the `scripts` folder which can read in your public resource VCF, and select common biallelic SNP variants (by default, those with an allele frequency of > 0.05).
+- This script can be directly run on the NCI Gadi HPC but it can also modified to run on any other computational resource.
+- In the `gatk4_selectvariants.pbs` script, you can replace `<>` with your resource for resource=`<path/to/public_dataset.vcf.gz>` and output file resource_common=`</path/to/output_public_dataset_common_biallelic.vcf.gz>`. 
+- On NCI Gadi HPC you can adjust the compute resouces and submit your job using the command :`qsub gatk4_selectvariants.pbs`.
+- We will include this functionality as an optional module in the next version of the pipeline.
 
 
 
@@ -136,7 +137,7 @@ The important features are:
 The most basic run command for this pipeline is: 
 
 ```
-nextflow run main.nf --input samples.csv --ref reference.fasta --ponvcf pon.vcf.gz
+nextflow run main.nf --input samples.csv --ref /path/to/ref --ponvcf pon.vcf.gz
         
 ```
 **Note**: Please use the command provided in the script `scripts/run_pipeline_on_gadi_script.sh` on NCI Gadi HPC.
