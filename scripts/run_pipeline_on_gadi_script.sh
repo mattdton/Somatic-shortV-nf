@@ -23,18 +23,20 @@ export NXF_SINGULARITY_CACHEDIR=/scratch/$PROJECT/$(whoami)/singularity
 samples=
 ponvcf=
 ref=
+dict=
 small_exac_common=
-intervalList_path=
 outDir=
+number_of_intervals=
 
 
-
+# Run the pipeline 
 # Run the pipeline 
 nextflow run main.nf \
         --input ${samples} \
         -profile gadi \
         --whoami $(whoami) --gadi_account $PROJECT \
-        --ref ${ref} --small_exac_common ${small_exac_common}\
-        --intervalList_path ${intervalList_path} \
+        --ref ${ref} --dict ${dict} \
+	--common_biallelic_variants ${common_biallelic_variants} \
         --ponvcf ${ponvcf} \
-        --outDir ${outDir} 
+        --outDir $outDir \
+        --number_of_intervals ${number_of_intervals} \

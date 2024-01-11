@@ -37,13 +37,14 @@ All the default parameters are set in `nextflow.config`
 =======================================================================================
 Workflow run parameters 
 =======================================================================================
-version           : ${params.version}
-input             : ${params.input}
-reference         : ${params.ref}
-small_exac_common : ${params.small_exac_common}
-ponvcf            : ${params.ponvcf}
-outDir            : ${params.outDir}
-workDir           : ${workflow.workDir}
+version                    : ${params.version}
+input                      : ${params.input}
+reference                  : ${params.ref}
+dict                       : ${params.dict} 
+common_biallelic_variants  : ${params.common_biallelic_variants}
+ponvcf                     : ${params.ponvcf}
+outDir                     : ${params.outDir}
+workDir                    : ${workflow.workDir}
 
 =======================================================================================
 
@@ -56,17 +57,22 @@ workDir           : ${workflow.workDir}
 
 def helpMessage() {
     log.info"""
-  Usage:   nextflow run main.nf --input samples.csv --ref reference.fasta --ponvcf pon.vcf.gz
+  Usage:   nextflow run main.nf --input samples.csv \
+                     --ref /path/to/ref.fasta --dict /path/to/ref.dict \
+                     --ponvcf /path/to/pon \
+                     --common_biallelic_variants /path/to/common_biallelic_variants
 
   Required Arguments:
     --input		                      Full path and name of sample input file (csv format)
 	  --ref			                      Full path and name of reference genome (fasta format)
-    --ponvcf                        Full path and name of the Panel of Normals (ponvcf) file
+    --dict                          Full path and name of reference genome dictionary file (dict format)
+    --ponvcf                        Full path and name of the Panel of Normals file (vcf format)
+    --common_biallelic_variants     Full path and name of the common biallelic variant resources file (vcf format)
 	
   Optional Arguments:
     --outDir                        Specify name of results directory. 
-    --dict                          Full path and name of reference genome dictionary file (contains metadata and sequence dictionary information)
-                                    The above dict file is required when the user chooses to create optimised number of intervals based on genome size
+    --number_of_intervals           Define a specific number genomic-intervals for parallelisation
+
 
   HPC accounting arguments:
     --whoami                    HPC user name (Setonix or Gadi HPC)
@@ -81,7 +87,7 @@ workflow {
 // Show help message if --help is run or if any required params are not 
 // provided at runtime
 
-  if ( params.help == true || params.ref == false || params.input == false || params.ponvcf == false || params.small_exac_common == '')
+  if ( params.help == true || params.ref == false || params.input == false || params.ponvcf == false || params.common_biallelic_variants == false || params.dict == false)
 	{   
 
           // Invoke the help function above and exit
@@ -123,10 +129,10 @@ MergeMutectStats(mutect2.out[1].collect(),bam_pair_ch)
 LearnReadOrientationModel(mutect2.out[2].collect(),bam_pair_ch)
   
 // Tabulate pileup metrics for inferring contamination - Tumor samples
-GetPileupSummaries_T(params.small_exac_common,params.small_exac_common+'.tbi', bam_pair_ch)
+GetPileupSummaries_T(params.common_biallelic_variants,params.common_biallelic_variants+'.tbi', bam_pair_ch)
 
 // Tabulate pileup metrics for inferring contamination - Normal samples
-GetPileupSummaries_N(params.small_exac_common,params.small_exac_common+'.tbi', bam_pair_ch)
+GetPileupSummaries_N(params.common_biallelic_variants,params.common_biallelic_variants+'.tbi', bam_pair_ch)
   
 // Calculate the fraction of reads coming from cross-sample contamination
 CalculateContamination(bam_pair_ch,GetPileupSummaries_T.out.collect(),GetPileupSummaries_N.out.collect())

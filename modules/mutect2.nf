@@ -26,7 +26,6 @@ process mutect2 {
         // Run mutect2 on a Tumor/Normal sample-pair
         
         """
-        
         echo "The values: $bam_id $bam_N $bam_T"
 
         gatk Mutect2 --java-options '-DGATK_STACKTRACE_ON_USER_EXCEPTION=true' \

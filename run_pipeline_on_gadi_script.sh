@@ -20,18 +20,13 @@ module load singularity
 export NXF_SINGULARITY_CACHEDIR=/scratch/$PROJECT/$(whoami)/singularity
 
 # Fill in these variables for your run
-
 samples=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/test_files_for_Georgie/samples.csv
 ponvcf=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/test_files_for_Georgie/pon.vcf.gz
 ref=/g/data/er01/SIH-HPC-WGS/Reference/hs38DH.fasta
-small_exac_common=/g/data/er01/SIH-HPC-WGS/Reference/gatk-best-practices/somatic-hg38/small_exac_common_3.hg38.vcf.gz
-intervalList_path=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/test_files_for_Georgie/interval_files
+common_biallelic_variants=/g/data/er01/SIH-HPC-WGS/Reference/gatk-best-practices/somatic-hg38/small_exac_common_3.hg38.vcf.gz
 outDir=results
 dict=/g/data/er01/SIH-HPC-WGS/Reference/hs38DH.dict
-
-# 
 #number_of_intervals=50
-
 
 
 # Run the pipeline 
@@ -39,8 +34,11 @@ nextflow run main.nf \
         --input ${samples} \
         -profile gadi \
         --whoami $(whoami) --gadi_account $PROJECT \
-        --ref ${ref} --dict ${dict}\
-	--small_exac_common ${small_exac_common}\
+        --ref ${ref} --dict ${dict} \
+	--common_biallelic_variants ${common_biallelic_variants} \
         --ponvcf ${ponvcf} \
         --outDir ${outDir} \
-        --number_of_intervals ${number_of_intervals} 
+        --number_of_intervals ${number_of_intervals}
+        
+
+        
