@@ -59,7 +59,7 @@ When you run the pipeline, you will use the mandatory `--input` parameter to spe
 --input /path/to/samples.csv
 ```
 
-Next, the user can create a a panel of normals (PoN) containing germline and artifactual sites for use with Mutect2 using the instructions provided [here](https://gatk.broadinstitute.org/hc/en-us/articles/360037058172-CreateSomaticPanelOfNormals-BETA-). You will use the mandatory `--ponvcf` parameter to specify the location and name of the PoN file:
+The user can create a panel of normals (PoN) containing germline and artifactual sites for use with Mutect2 using the instructions provided [here](https://gatk.broadinstitute.org/hc/en-us/articles/360037058172-CreateSomaticPanelOfNormals-BETA-). You will use the mandatory `--ponvcf` parameter to specify the location and name of the PoN file:
 ```
 --ponvcf /path/to/PoN
 ```
@@ -79,9 +79,9 @@ This pipeline uses the following tools for generating specific index files.
   - [picard](https://gatk.broadinstitute.org/hc/en-us/articles/360037593331-CreateSequenceDictionary-Picard-).dict 
   - [bwa](https://bio-bwa.sourceforge.net/bwa.shtml).amb, .ann, .bwt, .pac, .sa 
 
-When you run the pipeline, you will use the mandatory `--ref` parameter to specify the location and name of the reference.fasta file:
+When you run the pipeline, you will use the mandatory `--ref` and `--dict` parameters to specify the location and names of the reference files:
 ```
---ref /path/to/ref.fasta
+--ref /path/to/ref.fasta --dict /path/to/ref.dict
 ```
 
 **Common biallelic variant resources**  
@@ -89,7 +89,7 @@ Common biallelic variant resources, such as databases that catalog known genetic
 - A bash script `gatk4_selectvariants.pbs` is provided in the `scripts` folder which can read in your public resource VCF, and select common biallelic SNP variants (by default, those with an allele frequency of > 0.05). This script can be directly run on the NCI Gadi HPC. You can fill in the values for the required variables in this script and submit your job using the command :`qsub gatk4_selectvariants.pbs`.
 - We will include this functionality as an optional module in the next version of the pipeline.
 
-When you run the pipeline, you will use the mandatory `--ref` parameter to specify the location and name of the reference.fasta file:
+When you run the pipeline, you will use the mandatory `--common_biallelic_variants` parameter to specify the location and name of the reference.fasta file:
 ```
 --common_biallelic_variants /path/to/common_biallelic_variants.vcf
 ```
