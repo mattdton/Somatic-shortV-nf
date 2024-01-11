@@ -69,9 +69,8 @@ We will include this functionality to create the PoN as an optional module in th
 
 To run this pipeline you will need the following reference files:
 
-- Indexed reference genome in FASTA format. 
-- Genomic-interval list files for Mutect2
-- Common biallelic variant resources for GetPileupSummaries 
+- Indexed reference genome
+- Common biallelic variant resources
 
 **Reference genome indexes**  
 You can download FASTA files from the [Ensembl](https://asia.ensembl.org/info/data/ftp/index.html), [UCSC](https://genome.ucsc.edu/goldenPath/help/ftp.html), or [NCBI](https://www.ncbi.nlm.nih.gov/genome/doc/ftpfaq/) ftp. sites. Reference FASTA files must be accompanied by specific index files. You can use our [IndexReferenceFasta-nf pipeline](https://github.com/Sydney-Informatics-Hub/IndexReferenceFasta-nf) to generate indexes. 
@@ -80,13 +79,20 @@ This pipeline uses the following tools for generating specific index files.
   - [picard](https://gatk.broadinstitute.org/hc/en-us/articles/360037593331-CreateSequenceDictionary-Picard-).dict 
   - [bwa](https://bio-bwa.sourceforge.net/bwa.shtml).amb, .ann, .bwt, .pac, .sa 
 
-When you run the pipeline, you will use the mandatory --ref parameter to specify the location and name of the reference.fasta file:
+When you run the pipeline, you will use the mandatory `--ref` parameter to specify the location and name of the reference.fasta file:
 ```
 --ref /path/to/ref.fasta
 ```
 
-#### Create common biallelic variant resources for GetPileupSummaries 
-A bash script `gatk4_selectvariants.pbs` is provided in the `scripts` folder which can read in your public resource VCF, and select common biallelic SNP variants (by default, those with an allele frequency of > 0.05).This script can be directly run on the NCI Gadi HPC but it can also be modified to run on any other computational resource. In the `gatk4_selectvariants.pbs` script, you can replace `<>` with your resource for resource=`<path/to/public_dataset.vcf.gz>` and output file resource_common=`</path/to/output_public_dataset_common_biallelic.vcf.gz>`. On NCI Gadi HPC you can adjust the compute resouces and submit your job using the command :`qsub gatk4_selectvariants.pbs`.We will include this functionality as an optional module in the next version of the pipeline.
+**Common biallelic variant resources**  
+Common biallelic variant resources, such as databases that catalog known genetic variants (e.g., gnomAD) can be used to filter out germline variants and avoid false positives. 
+- A bash script `gatk4_selectvariants.pbs` is provided in the `scripts` folder which can read in your public resource VCF, and select common biallelic SNP variants (by default, those with an allele frequency of > 0.05). This script can be directly run on the NCI Gadi HPC. You can fill in the values for the required variables in this script and submit your job using the command :`qsub gatk4_selectvariants.pbs`.
+- We will include this functionality as an optional module in the next version of the pipeline.
+
+When you run the pipeline, you will use the mandatory `--ref` parameter to specify the location and name of the reference.fasta file:
+```
+--common_biallelic_variants /path/to/common_biallelic_variants.vcf
+```
 
 ### 3. Clone this repository 
 
