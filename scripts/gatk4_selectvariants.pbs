@@ -44,7 +44,8 @@ resource_common=../Reference/gatk-best-practices/somatic-hg38/af-only-gnomad.com
 
 set -e
 
-module load gatk/4.2.1.0
+
+module load gatk/4.4.0.0
 
 mkdir -p ${logdir}
 
