@@ -2,7 +2,7 @@
   
 #PBS -P er01 
 #PBS -N Somatic-shortV
-#PBS -l walltime=02:00:00
+#PBS -l walltime=06:00:00
 #PBS -l ncpus=1
 #PBS -l mem=60GB
 #PBS -W umask=022
@@ -20,13 +20,14 @@ module load singularity
 export NXF_SINGULARITY_CACHEDIR=/scratch/$PROJECT/$(whoami)/singularity
 
 # Fill in these variables for your run
-samples=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/test_files_for_Georgie/samples.csv
+#samples=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/test_files_for_Georgie/samples.csv
+samples=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/test_files_for_Georgie/samples_full.csv
 ponvcf=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/test_files_for_Georgie/pon.vcf.gz
 ref=/g/data/er01/SIH-HPC-WGS/Reference/hs38DH.fasta
 common_biallelic_variants=/g/data/er01/SIH-HPC-WGS/Reference/gatk-best-practices/somatic-hg38/small_exac_common_3.hg38.vcf.gz
 outDir=results
 dict=/g/data/er01/SIH-HPC-WGS/Reference/hs38DH.dict
-#number_of_intervals=50
+#number_of_intervals=23
 
 
 # Run the pipeline 

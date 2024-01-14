@@ -59,7 +59,7 @@ When you run the pipeline, you will use the mandatory `--input` parameter to spe
 --input /path/to/samples.csv
 ```
 
-The user can create a panel of normals (PoN) containing germline and artifactual sites for use with Mutect2 using the instructions provided [here](https://gatk.broadinstitute.org/hc/en-us/articles/360037058172-CreateSomaticPanelOfNormals-BETA-). You will use the mandatory `--ponvcf` parameter to specify the location and name of the PoN file:
+The user can create a panel of normals (PoN) containing germline and artifactual sites for use with Mutect2 using the instructions provided [here](https://gatk.broadinstitute.org/hc/en-us/articles/13832769396635-CreateSomaticPanelOfNormals-BETA-). You will use the mandatory `--ponvcf` parameter to specify the location and name of the PoN file:
 ```
 --ponvcf /path/to/PoN
 ```
