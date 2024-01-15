@@ -85,11 +85,11 @@ When you run the pipeline, you will use the mandatory `--ref` and `--dict` param
 ```
 
 **Common biallelic variant resources**  
-Common biallelic variant resources, such as databases that catalog known genetic variants (e.g., gnomAD) can be used to filter out germline variants and avoid false positives. 
-- A bash script `gatk4_selectvariants.pbs` is provided in the `scripts` folder which can read in your public resource VCF, and select common biallelic SNP variants (by default, those with an allele frequency of > 0.05). This script can be directly run on the NCI Gadi HPC. You can fill in the values for the required variables in this script and submit your job using the command :`qsub gatk4_selectvariants.pbs`.
-- We will include this functionality as an optional module in the next version of the pipeline.
+Common biallelic variants databases (e.g. gnomAD) can be used to filter false positive germline variants from your somatic variant dataset. We have provided a script `scripts/gatk4_selectvariants.pbs` for this purpose. It executes[ GATK's SelectVariants](https://gatk.broadinstitute.org/hc/en-us/articles/13832694334235-SelectVariants) tool. This will be included as an optional functionality in this pipeline in an upcoming update.
 
-When you run the pipeline, you will use the mandatory `--common_biallelic_variants` parameter to specify the location and name of the reference.fasta file:
+
+
+When you run the pipeline, you will use the mandatory `--common_biallelic_variants` parameter to specify the location and name of the vcf file:
 ```
 --common_biallelic_variants /path/to/common_biallelic_variants.vcf
 ```
@@ -139,7 +139,7 @@ To specify additional optional tool-specific parameters, see what flags are supp
 ```
 nextflow run main.nf --help 
 ```
-A more advanced nextflow command with optional parameters, where you can define the name of the output folder and provide an integer value for the number of genomic-interval files to be generated looks like this:
+The  nextflow command with optional parameters, where you can define the name of the output folder and provide an integer value for the number of genomic-interval files is:
 ```
 nextflow run main.nf --input samples.csv \
                      --ref /path/to/ref.fasta --dict /path/to/ref.dict \
@@ -158,7 +158,7 @@ nextflow run main.nf --input samples.csv \
 
 **Optional parameters**  
 * `--outDir`                        Name of the results directory                                         (**default:** `results`)  
-* `--number_of_intervals`           Define a specific number genomic-intervals for parallelisation        (**default:** `number of intervals are calculated using genome size`)  
+* `--number_of_intervals`           Define a specific number genomic-intervals for parallelisation        (**default:** `automatically calculated using genome size`)  
 
 
 If for any reason your workflow fails, you are able to resume the workflow from the last successful process with `-resume`. 
