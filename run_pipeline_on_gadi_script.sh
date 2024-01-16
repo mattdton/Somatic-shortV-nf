@@ -20,8 +20,8 @@ module load singularity
 export NXF_SINGULARITY_CACHEDIR=/scratch/$PROJECT/$(whoami)/singularity
 
 # Fill in these variables for your run
-#samples=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/test_files_for_Georgie/samples.csv
-samples=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/test_files_for_Georgie/samples_full.csv
+samples=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/test_files_for_Georgie/samples.csv
+#samples=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/test_files_for_Georgie/samples_full.csv
 ponvcf=/scratch/er01/ndes8648/pipeline_work/nextflow/INFRA-83-Somatic-ShortV/test_files_for_Georgie/pon.vcf.gz
 ref=/g/data/er01/SIH-HPC-WGS/Reference/hs38DH.fasta
 common_biallelic_variants=/g/data/er01/SIH-HPC-WGS/Reference/gatk-best-practices/somatic-hg38/small_exac_common_3.hg38.vcf.gz
@@ -31,7 +31,7 @@ dict=/g/data/er01/SIH-HPC-WGS/Reference/hs38DH.dict
 
 
 # Run the pipeline 
-nextflow run main.nf \
+nextflow run main.nf -resume \
         --input ${samples} \
         -profile gadi \
         --whoami $(whoami) --gadi_account $PROJECT \
