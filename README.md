@@ -77,7 +77,6 @@ You can download FASTA files from the [Ensembl](https://asia.ensembl.org/info/da
 This pipeline uses the following tools for generating specific index files.
   - [samtools](https://www.htslib.org/doc/samtools-faidx.html).fai
   - [picard](https://gatk.broadinstitute.org/hc/en-us/articles/360037593331-CreateSequenceDictionary-Picard-).dict 
-  - [bwa](https://bio-bwa.sourceforge.net/bwa.shtml).amb, .ann, .bwt, .pac, .sa 
 
 When you run the pipeline, you will use the mandatory `--ref` and `--dict` parameters to specify the location and names of the reference files:
 ```
