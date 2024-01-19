@@ -3,7 +3,7 @@
 process LearnReadOrientationModel {
 
         tag "LearnReadOrientationModel $bam_id"
-        publishDir "${params.outDir}", mode:'copy'
+        publishDir "${params.outDir}/${bam_id}/LearnReadOrientationModel", mode:'copy'
 
         input:
                 path ('*') 

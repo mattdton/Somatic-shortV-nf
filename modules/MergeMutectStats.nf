@@ -3,7 +3,7 @@
 process MergeMutectStats {
 
         tag "MergeMutectStats"
-        publishDir "${params.outDir}", mode:'copy'
+        publishDir "${params.outDir}/${bam_id}/MergeMutectStats", mode:'copy'
 
         input:
                 path ('*') 
