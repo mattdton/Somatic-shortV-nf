@@ -3,7 +3,7 @@
 process GetPileupSummaries_T {
 
         tag "GetPileupSummaries $bam_id"
-        publishDir "${params.outDir}", mode:'copy'
+        publishDir "${params.outDir}/${bam_id}/GetPileupSummaries", mode:'copy'
 
         input:
                 path common_biallelic
@@ -29,7 +29,7 @@ process GetPileupSummaries_T {
 process GetPileupSummaries_N {
 
         tag "GetPileupSummaries $bam_id"
-        publishDir "${params.outDir}", mode:'copy'
+        publishDir "${params.outDir}/${bam_id}/GetPileupSummaries", mode:'copy'
 
         input:
                 path common_biallelic

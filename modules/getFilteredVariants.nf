@@ -3,7 +3,7 @@
 process getFilteredVariants {
 
         tag "getFilteredVariants $bam_id"
-        publishDir "${params.outDir}", mode:'copy'
+        publishDir "${params.outDir}/${bam_id}/getFilteredVariants", mode:'copy'
 
         input:
                 tuple val(bam_id) , file(bam_N), file(bam_T)

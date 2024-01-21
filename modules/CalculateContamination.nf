@@ -3,7 +3,7 @@
 process CalculateContamination {
 
         tag "CalculateContamination $bam_id"
-        publishDir "${params.outDir}", mode:'copy'
+        publishDir "${params.outDir}/${bam_id}/CalculateContamination", mode:'copy'
 
         input:
 		tuple val(bam_id) , file(bam_N), file(bam_T)

@@ -5,7 +5,7 @@ process mutect2 {
         
         // where to publish the outputs
         tag "$bam_id $splitIntervalNumber"
-        publishDir "${params.outDir}", mode:'copy'
+        publishDir "${params.outDir}/${bam_id}/mutect2", mode:'copy'
         
         
         

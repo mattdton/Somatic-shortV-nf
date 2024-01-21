@@ -3,7 +3,7 @@
 process GatherVcfs {
 
         tag "GatherVcfs $bam_id"
-        publishDir "${params.outDir}", mode:'copy'
+        publishDir "${params.outDir}/${bam_id}/GatherVcfs", mode:'copy'
 
         input:
                 path ('*')

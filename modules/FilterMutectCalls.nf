@@ -3,7 +3,7 @@
 process FilterMutectCalls {
 
         tag "FilterMutectCalls $bam_id"
-        publishDir "${params.outDir}", mode:'copy'
+        publishDir "${params.outDir}/${bam_id}/FilterMutectCalls", mode:'copy'
 
         input :
 		tuple val(bam_id) , file(bam_N), file(bam_T)
