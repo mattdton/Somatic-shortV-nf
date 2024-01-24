@@ -28,7 +28,8 @@ process mutect2 {
         """
         echo "The values: $bam_id $bam_N $bam_T"
 
-        gatk Mutect2 --java-options '-DGATK_STACKTRACE_ON_USER_EXCEPTION=true' \
+        gatk Mutect2 --java-options '-Xms2G -Xmx${task.memory.toMega()}m -DGATK_STACKTRACE_ON_USER_EXCEPTION=true' \
+             --smith-waterman FASTEST_AVAILABLE \
              -R ${params.ref} \
              -I ${bam_T} \
              -I ${bam_N} \
